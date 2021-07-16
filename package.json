@@ -1,0 +1,29 @@
+{
+  "name": "@CityOfZion/dora-ts",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index",
+  "types": "dist/index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CityOfZion/dora-sdk-ts"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "private": false,
+  "scripts": {
+    "tsc": "tsc",
+    "test": "jest"
+  },
+  "jest": {
+    "testTimeout": 10000
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
