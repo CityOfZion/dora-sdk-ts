@@ -1,4 +1,4 @@
-const sdk = require("../../../../dist")
+const sdk = require("../../../dist")
 
 test("should get address_stats", async () => {
     let res = await sdk.api.NeoLegacyREST.addressStats("AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M")

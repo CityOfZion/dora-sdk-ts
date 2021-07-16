@@ -1,4 +1,4 @@
-const sdk = require("../../../../dist")
+const sdk = require("../../../dist")
 
 test("should get an asset", async () => {
     const res = await sdk.api.NeoRest.asset("0x3466566e4f93d788a7129231b363e7f32fd50f07", "testnet")
