@@ -1,4 +1,4 @@
-import {TypedResponse, Witness} from "../common";
+import { TypedResponse, Witness } from '../common'
 
 export interface ABI {
   events: Event[]
