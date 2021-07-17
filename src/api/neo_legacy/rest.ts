@@ -29,8 +29,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<AddressStatsResponse> {
     const method = 'address_stats'
-    const { data } = await this.axios.get(`/${network}/${method}/${address}`)
-    return data
+    return await this.get(network, method, address)
   }
 
   static async asset(
@@ -38,8 +37,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<AssetResponse> {
     const method = 'asset'
-    const { data } = await this.axios.get(`/${network}/${method}/${assetHash}`)
-    return data
+    return await this.get(network, method, assetHash)
   }
 
   static async assets(
@@ -47,8 +45,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<AssetsResponse> {
     const method = 'assets'
-    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
-    return data
+    return await this.get(network, method, page)
   }
 
   static async balance(
@@ -56,8 +53,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<BalanceResponse> {
     const method = 'balance'
-    const { data } = await this.axios.get(`/${network}/${method}/${address}`)
-    return data
+    return await this.get(network, method, address)
   }
 
   static async block(
@@ -65,8 +61,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<BlockResponse> {
     const method = 'block'
-    const { data } = await this.axios.get(`/${network}/${method}/${blockHash}`)
-    return data
+    return await this.get(network, method, blockHash)
   }
 
   static async blocks(
@@ -74,8 +69,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<BlocksResponse> {
     const method = 'blocks'
-    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
-    return data
+    return await this.get(network, method, page)
   }
 
   static async contract(
@@ -83,10 +77,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<ContractResponse> {
     const method = 'contract'
-    const { data } = await this.axios.get(
-      `/${network}/${method}/${contractHash}`
-    )
-    return data
+    return await this.get(network, method, contractHash)
   }
 
   static async contracts(
@@ -94,8 +85,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<ContractsResponse> {
     const method = 'contracts'
-    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
-    return data
+    return await this.get(network, method, page)
   }
 
   static async contractTransfers(
@@ -104,10 +94,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<ContractTransfersResponse> {
     const method = 'contract_transfers'
-    const { data } = await this.axios.get(
-      `/${network}/${method}/${contractHash}/${page}`
-    )
-    return data
+    return await this.get(network, method, contractHash, page)
   }
 
   static async getAddressAbstracts(
@@ -116,30 +103,24 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<GetAddressAbstractsResponse> {
     const method = 'get_address_abstracts'
-    const { data } = await this.axios.get(
-      `/${network}/${method}/${address}/${page}`
-    )
-    return data
+    return await this.get(network, method, address, page)
   }
 
   static async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
-    const { data } = await this.axios.get(`/${network}/${method}`)
-    return data
+    return await this.get(network, method)
   }
 
   static async height(network = 'mainnet'): Promise<HeightResponse> {
     const method = 'height'
-    const { data } = await this.axios.get(`/${network}/${method}`)
-    return data
+    return await this.get(network, method)
   }
 
   static async invocationStats(
     network = 'mainnet'
   ): Promise<InvocationStatsResponse> {
     const method = 'invocation_stats'
-    const { data } = await this.axios.get(`/${network}/${method}`)
-    return data
+    return await this.get(network, method)
   }
 
   static async log(
@@ -147,10 +128,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<LogResponse> {
     const method = 'log'
-    const { data } = await this.axios.get(
-      `/${network}/${method}/${contractHash}`
-    )
-    return data
+    return await this.get(network, method, contractHash)
   }
 
   static async storage(
@@ -158,8 +136,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<StorageResponse> {
     const method = 'storage'
-    const { data } = await this.axios.get(`/${network}/${method}/${blockHash}`)
-    return data
+    return await this.get(network, method, blockHash)
   }
 
   static async transaction(
@@ -167,8 +144,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransactionResponse> {
     const method = 'transaction'
-    const { data } = await this.axios.get(`/${network}/${method}/${txid}`)
-    return data
+    return await this.get(network, method, txid)
   }
 
   static async transactions(
@@ -176,8 +152,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransactionsResponse> {
     const method = 'transactions'
-    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
-    return data
+    return await this.get(network, method, page)
   }
 
   static async transactionAbstracts(
@@ -185,8 +160,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransactionAbstractsResponse> {
     const method = 'transaction_abstracts'
-    const { data } = await this.axios.get(`/${network}/${method}/${txid}`)
-    return data
+    return await this.get(network, method, txid)
   }
 
   static async transferHistory(
@@ -195,9 +169,12 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransferHistoryResponse> {
     const method = 'transfer_history'
-    const { data } = await this.axios.get(
-      `/${network}/${method}/${address}/${page}`
-    )
+    return await this.get(network, method, address, page)
+  }
+
+  private static async get(...args: any[]) {
+    const endpoint = args.join('/')
+    const { data } = await this.axios.get(`/${endpoint}`)
     return data
   }
 }
