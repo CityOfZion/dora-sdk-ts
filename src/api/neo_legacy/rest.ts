@@ -1,4 +1,4 @@
-import {
+import type {
   AddressStatsResponse,
   AssetResponse,
   AssetsResponse,
@@ -19,20 +19,17 @@ import {
   TransactionsResponse,
   TransferHistoryResponse
 } from '../../interfaces/api/neo_legacy'
-import { DORA_URL } from '../../constants'
-import axios from 'axios'
+import { AXIOS_DORA } from '../../constants'
 
 export class NeoLegacyREST {
-  static readonly DORA_ROOT = DORA_URL + '/api/v1/neo2'
+  static axios = AXIOS_DORA('v2')
 
   static async addressStats(
     address: string,
     network = 'mainnet'
   ): Promise<AddressStatsResponse> {
     const method = 'address_stats'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${address}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${address}`)
     return data
   }
 
@@ -41,9 +38,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<AssetResponse> {
     const method = 'asset'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${assetHash}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${assetHash}`)
     return data
   }
 
@@ -52,9 +47,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<AssetsResponse> {
     const method = 'assets'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -63,9 +56,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<BalanceResponse> {
     const method = 'balance'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${address}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${address}`)
     return data
   }
 
@@ -74,9 +65,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<BlockResponse> {
     const method = 'block'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${blockHash}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${blockHash}`)
     return data
   }
 
@@ -85,9 +74,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<BlocksResponse> {
     const method = 'blocks'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -96,8 +83,8 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<ContractResponse> {
     const method = 'contract'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${contractHash}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${contractHash}`
     )
     return data
   }
@@ -107,9 +94,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<ContractsResponse> {
     const method = 'contracts'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -119,8 +104,8 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<ContractTransfersResponse> {
     const method = 'contract_transfers'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${contractHash}/${page}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${contractHash}/${page}`
     )
     return data
   }
@@ -131,21 +116,21 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<GetAddressAbstractsResponse> {
     const method = 'get_address_abstracts'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${address}/${page}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${address}/${page}`
     )
     return data
   }
 
   static async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
-    const { data } = await axios.get(`${this.DORA_ROOT}/${network}/${method}`)
+    const { data } = await this.axios.get(`/${network}/${method}`)
     return data
   }
 
   static async height(network = 'mainnet'): Promise<HeightResponse> {
     const method = 'height'
-    const { data } = await axios.get(`${this.DORA_ROOT}/${network}/${method}`)
+    const { data } = await this.axios.get(`/${network}/${method}`)
     return data
   }
 
@@ -153,7 +138,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<InvocationStatsResponse> {
     const method = 'invocation_stats'
-    const { data } = await axios.get(`${this.DORA_ROOT}/${network}/${method}`)
+    const { data } = await this.axios.get(`/${network}/${method}`)
     return data
   }
 
@@ -162,8 +147,8 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<LogResponse> {
     const method = 'log'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${contractHash}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${contractHash}`
     )
     return data
   }
@@ -173,9 +158,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<StorageResponse> {
     const method = 'storage'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${blockHash}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${blockHash}`)
     return data
   }
 
@@ -184,9 +167,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransactionResponse> {
     const method = 'transaction'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${txid}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${txid}`)
     return data
   }
 
@@ -195,9 +176,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransactionsResponse> {
     const method = 'transactions'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -206,9 +185,7 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransactionAbstractsResponse> {
     const method = 'transaction_abstracts'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${txid}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${txid}`)
     return data
   }
 
@@ -218,8 +195,8 @@ export class NeoLegacyREST {
     network = 'mainnet'
   ): Promise<TransferHistoryResponse> {
     const method = 'transfer_history'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${address}/${page}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${address}/${page}`
     )
     return data
   }

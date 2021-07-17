@@ -1,6 +1,4 @@
-import { DORA_URL } from '../../constants'
-import axios from 'axios'
-import {
+import type {
   AssetResponse,
   BalanceResponse,
   BlockResponse,
@@ -14,26 +12,23 @@ import {
   TransactionsResponse,
   TransferHistoryResponse
 } from '../../interfaces/api/neo'
+import { AXIOS_DORA } from '../../constants'
 
 export class NeoRest {
-  static readonly DORA_ROOT = DORA_URL + '/api/v1/neo3'
+  static axios = AXIOS_DORA('v3')
 
   static async asset(
     assetHash: string,
     network = 'mainnet'
   ): Promise<AssetResponse> {
     const method = 'asset'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${assetHash}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${assetHash}`)
     return data
   }
 
   static async assets(page: number = 1, network = 'mainnet'): Promise<any> {
     const method = 'assets'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -42,9 +37,7 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<BalanceResponse> {
     const method = 'balance'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${address}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${address}`)
     return data
   }
 
@@ -53,8 +46,8 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<BlockResponse> {
     const method = 'block'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${blockHeight}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${blockHeight}`
     )
     return data
   }
@@ -64,9 +57,7 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<BlocksResponse> {
     const method = 'blocks'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -75,8 +66,8 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<ContractResponse> {
     const method = 'contract'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${contractHash}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${contractHash}`
     )
     return data
   }
@@ -86,9 +77,7 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<ContractsResponse> {
     const method = 'contracts'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -97,29 +86,27 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<Object> {
     const method = 'contract_stats'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${contractHash}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${contractHash}`
     )
     return data
   }
 
   static async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
-    const { data } = await axios.get(`${this.DORA_ROOT}/${network}/${method}`)
+    const { data } = await this.axios.get(`/${network}/${method}`)
     return data
   }
 
   static async height(network = 'mainnet'): Promise<HeightResponse> {
     const method = 'height'
-    const { data } = await axios.get(`${this.DORA_ROOT}/${network}/${method}`)
+    const { data } = await this.axios.get(`/${network}/${method}`)
     return data
   }
 
   static async log(txid: string, network = 'mainnet'): Promise<LogResponse> {
     const method = 'log'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${txid}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${txid}`)
     return data
   }
 
@@ -128,9 +115,7 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<TransactionResponse> {
     const method = 'transaction'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${txid}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${txid}`)
     return data
   }
 
@@ -139,9 +124,7 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<TransactionsResponse> {
     const method = 'transactions'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${page}`
-    )
+    const { data } = await this.axios.get(`/${network}/${method}/${page}`)
     return data
   }
 
@@ -151,8 +134,8 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<TransferHistoryResponse> {
     const method = 'transfer_history'
-    const { data } = await axios.get(
-      `${this.DORA_ROOT}/${network}/${method}/${address}/${page}`
+    const { data } = await this.axios.get(
+      `/${network}/${method}/${address}/${page}`
     )
     return data
   }
