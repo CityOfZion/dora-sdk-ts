@@ -9,7 +9,7 @@
     "url": "https://github.com/CityOfZion/dora-sdk-ts"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "private": false,
   "scripts": {
