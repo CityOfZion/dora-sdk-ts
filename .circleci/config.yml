@@ -1,0 +1,29 @@
+version: 2.1
+jobs:
+  test:
+    working_directory: ~/dora-sdk-ts
+    docker:
+      - image: circleci/node:14.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: install dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: build
+          command: npm run tsc
+      - run:
+          name: test
+          command: npm run test
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test
