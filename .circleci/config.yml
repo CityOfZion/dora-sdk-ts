@@ -1,9 +1,13 @@
 version: 2.1
+
+defaults: &defaults
+  working_directory: ~/dora-sdk-ts
+  docker:
+    - image: circleci/node:14.16.0
+
 jobs:
   test:
-    working_directory: ~/dora-sdk-ts
-    docker:
-      - image: circleci/node:14.16.0
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -22,8 +26,39 @@ jobs:
           name: test
           command: npm run test
 
+      - persist_to_workspace:
+          root: ~/dora-sdk-ts
+          paths: .
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/dora-sdk-ts
+      - run:
+          name: Authenticate
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/dora-sdk-ts/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+
+
 workflows:
   version: 2
-  build:
+  build_test_deploy:
     jobs:
-      - test
+      - test:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          context: npm_prod
+          requires:
+            - test
+          filters:
+            tags:
+              only:
+                - /^v.*/
+            branches:
+              ignore:
+                - /.*/

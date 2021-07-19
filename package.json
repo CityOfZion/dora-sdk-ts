@@ -1,5 +1,5 @@
 {
-  "name": "@CityOfZion/dora-ts",
+  "name": "@cityofzion/dora-ts",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index",
@@ -9,7 +9,7 @@
     "url": "https://github.com/CityOfZion/dora-sdk-ts"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "private": false,
   "scripts": {
