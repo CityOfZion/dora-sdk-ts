@@ -6,9 +6,9 @@ export const DORA_URL = 'https://dora.coz.io'
 export const AXIOS_DORA = (version: string): AxiosInstance => {
   let endpoint: string = ''
 
-  if (version === 'v2') {
+  if (version === 'neoLegacy') {
     endpoint = '/api/v1/neo2'
-  } else if (version === 'v3') {
+  } else if (version === 'neo') {
     endpoint = '/api/v1/neo3'
   }
 

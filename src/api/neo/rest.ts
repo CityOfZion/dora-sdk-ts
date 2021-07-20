@@ -15,7 +15,7 @@ import type {
 import { AXIOS_DORA } from '../../constants'
 
 export class NeoRest {
-  static axios = AXIOS_DORA('v3')
+  static axios = AXIOS_DORA('neo')
 
   static async asset(
     assetHash: string,

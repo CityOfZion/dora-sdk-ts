@@ -22,7 +22,7 @@ import type {
 import { AXIOS_DORA } from '../../constants'
 
 export class NeoLegacyREST {
-  static axios = AXIOS_DORA('v2')
+  static axios = AXIOS_DORA('neoLegacy')
 
   static async addressStats(
     address: string,
