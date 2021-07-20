@@ -1,4 +1,4 @@
-import {TypedResponse, Witness} from "../common";
+import { TypedResponse, Witness } from '../common'
 
 export interface AddressAbstractEntry {
   txid: string
@@ -8,7 +8,6 @@ export interface AddressAbstractEntry {
   address_to: string
   address_from: string
   amount: number
-
 }
 
 export interface ApplicationLog {
@@ -112,7 +111,7 @@ export interface TransferAbstract {
 
 export interface Transaction {
   _id?: string
-  attributes?: any[],
+  attributes?: any[]
   block: number
   gas?: string
   jsonsize?: number

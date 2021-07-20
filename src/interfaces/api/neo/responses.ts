@@ -1,11 +1,13 @@
 import {
   Asset,
   Balance,
-  Block, NodeMetaData, TypedResponse,
+  Block,
+  NodeMetaData,
+  TypedResponse,
   Witness
-} from "../common"
-import {Manifest, NEF, Token, Transaction} from "./interface";
-import {TransferAbstract} from "../neo_legacy";
+} from '../common'
+import { Manifest, NEF, Token, Transaction } from './interface'
+import { TransferAbstract } from '../neo_legacy'
 
 export type AssetResponse = Token
 
@@ -78,7 +80,7 @@ export interface LogResponse {
 export type TransactionResponse = Transaction
 
 export interface TransactionsResponse {
-  items: Transaction
+  items: Transaction[]
   totalCount: number
 }
 

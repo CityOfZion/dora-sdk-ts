@@ -11,8 +11,8 @@ import {
   TimedBalance,
   Transaction,
   TransferAbstract
-} from "./interface";
-import {Balance, Block, NodeMetaData, Witness} from "../common";
+} from './interface'
+import { Balance, Block, NodeMetaData, Witness } from '../common'
 
 export type AddressStatsResponse = {
   asset: string
@@ -76,7 +76,6 @@ export interface GetAddressAbstractsResponse {
 }
 
 export type GetAllNodesResponse = NodeMetaData[]
-
 
 export interface HeightResponse {
   height: number
