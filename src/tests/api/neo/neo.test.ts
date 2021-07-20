@@ -80,7 +80,6 @@ describe('neo sdk', () => {
   it('should get nodes', async () => {
     const res = await NeoRest.getAllNodes('testnet')
     assert.isNotNull(res)
-    assert.strictEqual(res.length, 7)
   })
 
   it('should get the block height', async () => {
