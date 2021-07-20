@@ -18,12 +18,9 @@
 
 ## Quickstart:
 
-* To build: `npm run tsc`
+* To build: `npm run build`
 * To test: `npm run test`
+* To format `npm run fmt`
 
 ## Notes:
 * This first commit attempts to define code structure and incorporate the majority of the dora endpoints and interfaces.
-
-## Needed:
-* test coverage
-* linting
