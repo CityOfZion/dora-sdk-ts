@@ -9,7 +9,7 @@ import type {
   ContractsResponse,
   ContractTransfersResponse,
   GetAddressAbstractsResponse,
-  GetAllNodesResponse,
+  GetAllNodesResponse, GetClaimableResponse, GetUnclaimedResponse,
   HeightResponse,
   InvocationStatsResponse,
   LogResponse,
@@ -109,6 +109,22 @@ export class NeoLegacyREST {
   static async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
     return await this.get(network, method)
+  }
+
+  static async getClaimable(
+    address: string,
+    network = 'mainnet'
+  ): Promise<GetClaimableResponse> {
+    const method = 'get_claimable'
+    return await this.get(network, method, address)
+  }
+
+  static async getUnclaimed(
+    address: string,
+    network = 'mainnet'
+  ): Promise<GetUnclaimedResponse> {
+    const method = 'get_unclaimed'
+    return await this.get(network, method, address)
   }
 
   static async height(network = 'mainnet'): Promise<HeightResponse> {

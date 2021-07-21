@@ -79,6 +79,17 @@ export interface ContractTransfer {
   amount: number
 }
 
+export interface ClaimableEvent {
+  txid: string
+  n: number
+  value: number
+  start_height: number
+  end_height: number
+  generated: number
+  sys_fee: number
+  unclaimed: number
+}
+
 export interface InputOutput {
   n: number
   asset: string

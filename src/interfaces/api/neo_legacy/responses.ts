@@ -1,7 +1,7 @@
 import {
   AddressAbstractEntry,
   ApplicationLog,
-  Asset,
+  Asset, ClaimableEvent,
   ContractInvocationStats,
   ContractMetaData,
   ContractState,
@@ -76,6 +76,18 @@ export interface GetAddressAbstractsResponse {
 }
 
 export type GetAllNodesResponse = NodeMetaData[]
+
+export interface GetClaimableResponse {
+  claimable: ClaimableEvent[]
+  address: string
+  unclaimed: number
+}
+
+export interface GetUnclaimedResponse {
+  available: number
+  unavailable: number
+  unclaimed: number
+}
 
 export interface HeightResponse {
   height: number
