@@ -88,6 +88,13 @@ export class NeoLegacyREST {
     return await this.get(network, method, page)
   }
 
+  static async contractStats(
+    contractHash: string,
+    network = 'mainnet'): Promise<Object> {
+    const method = "contract_stats"
+    return await this.get(network, method)
+  }
+
   static async contractTransfers(
     contractHash: string,
     page: number = 1,
