@@ -5,6 +5,16 @@ export interface ABI {
   methods: Method[]
 }
 
+export interface Contract {
+  asset_name: string
+  block: number
+  hash: string
+  manifest: Manifest
+  symbol: string
+  time: string
+  type: string
+}
+
 export interface Token {
   decimals: string
   firstseen: number

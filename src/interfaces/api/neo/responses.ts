@@ -6,7 +6,7 @@ import {
   TypedResponse,
   Witness
 } from '../common'
-import { Manifest, NEF, Token, Transaction } from './interface'
+import {Contract, Manifest, NEF, Token, Transaction} from './interface'
 import { TransferAbstract } from '../neo_legacy'
 
 export type AssetResponse = Token
@@ -51,13 +51,8 @@ export interface ContractResponse {
 }
 
 export interface ContractsResponse {
-  asset_name: string
-  block: number
-  hash: string
-  manifest: Manifest
-  symbol: string
-  time: string
-  type: string
+  items: Contract[]
+  totalCount: number
 }
 
 export type GetAllNodesResponse = NodeMetaData[]
