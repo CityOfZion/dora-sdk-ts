@@ -7,7 +7,7 @@ import {
   Witness
 } from '../common'
 import {Contract, Manifest, NEF, Token, Transaction} from './interface'
-import { TransferAbstract } from '../neo_legacy'
+import {ContractInvocationStats, TransferAbstract} from '../neo_legacy'
 
 export type AssetResponse = Token
 
@@ -60,6 +60,8 @@ export type GetAllNodesResponse = NodeMetaData[]
 export interface HeightResponse {
   height: number
 }
+
+export type InvocationStatsResponse = ContractInvocationStats[]
 
 export interface LogResponse {
   exception?: any

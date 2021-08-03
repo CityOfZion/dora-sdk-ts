@@ -6,7 +6,7 @@ import type {
   ContractResponse,
   ContractsResponse,
   GetAllNodesResponse,
-  HeightResponse,
+  HeightResponse, InvocationStatsResponse,
   LogResponse,
   TransactionResponse,
   TransactionsResponse,
@@ -85,6 +85,13 @@ export class NeoRest {
 
   static async height(network = 'mainnet'): Promise<HeightResponse> {
     const method = 'height'
+    return await this.get(network, method)
+  }
+
+  static async invocationStats(
+    network = 'mainnet'
+  ): Promise<InvocationStatsResponse> {
+    const method = 'invocation_stats'
     return await this.get(network, method)
   }
 
