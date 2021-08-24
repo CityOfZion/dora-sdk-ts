@@ -1,15 +1,5 @@
 import { TypedResponse, Witness } from '../common'
 
-export interface AddressAbstractEntry {
-  txid: string
-  time: number
-  block_height: number
-  asset: string
-  address_to: string
-  address_from: string
-  amount: number
-}
-
 export interface ApplicationLog {
   gas_consumed: string
   logs: any[]
@@ -27,13 +17,6 @@ export interface Asset {
   name: string
   symbol: string
   decimals: string
-}
-
-export interface ContractInvocationStats {
-  name: string
-  hash: string
-  count: number
-  change: string
 }
 
 export interface ContractMetaData {
@@ -105,19 +88,6 @@ export interface Notification {
 export interface TimedBalance {
   balance: number
   date: string
-}
-
-export interface TransferAbstract {
-  amount: string
-  asset_name?: string
-  block: number
-  from: string
-  scripthash: string
-  symbol?: string
-  time: string
-  to: string
-  transferindex: string
-  txid: string
 }
 
 export interface Transaction {

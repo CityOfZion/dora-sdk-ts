@@ -1,3 +1,13 @@
+export interface AddressAbstractEntry {
+  txid: string
+  time: number
+  block_height: number
+  asset: string
+  address_to: string
+  address_from: string
+  amount: number
+}
+
 export interface Asset {
   scripthash: string
   firstseen: number
@@ -20,6 +30,13 @@ export interface Block {
   index: number
   blocktime: number
   txCount: number
+}
+
+export interface ContractInvocationStats {
+  name: string
+  hash: string
+  count: number
+  change: string
 }
 
 export interface NodeMetaData {

@@ -18,14 +18,18 @@ describe('neo legacy', () => {
     assert.strictEqual(res.entries.length, 15)
   })
 
-  it ('should get the claimable transactions', async () => {
-    const res = await NeoLegacyREST.getClaimable('AciSRoWhAF95rvJVkWX38XfNPLLDjWEsoE')
+  it('should get the claimable transactions', async () => {
+    const res = await NeoLegacyREST.getClaimable(
+      'AciSRoWhAF95rvJVkWX38XfNPLLDjWEsoE'
+    )
     assert.isNotNull(res)
     assert.strictEqual(Object.keys(res).length, 3)
   })
 
-  it ('should get the unclaimed metadata', async () => {
-    const res = await NeoLegacyREST.getUnclaimed('AciSRoWhAF95rvJVkWX38XfNPLLDjWEsoE')
+  it('should get the unclaimed metadata', async () => {
+    const res = await NeoLegacyREST.getUnclaimed(
+      'AciSRoWhAF95rvJVkWX38XfNPLLDjWEsoE'
+    )
     assert.isNotNull(res)
     assert.strictEqual(Object.keys(res).length, 3)
   })

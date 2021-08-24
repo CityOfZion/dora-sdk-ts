@@ -5,8 +5,10 @@ import type {
   BlocksResponse,
   ContractResponse,
   ContractsResponse,
+  GetAddressAbstractsResponse,
   GetAllNodesResponse,
-  HeightResponse, InvocationStatsResponse,
+  HeightResponse,
+  InvocationStatsResponse,
   LogResponse,
   TransactionResponse,
   TransactionsResponse,
@@ -76,6 +78,15 @@ export class NeoRest {
   ): Promise<Object> {
     const method = 'contract_stats'
     return await this.get(network, method, contractHash)
+  }
+
+  static async getAddressAbstracts(
+    address: string,
+    page = 1,
+    network = 'mainnet'
+  ): Promise<GetAddressAbstractsResponse> {
+    const method = 'get_address_abstracts'
+    return await this.get(network, method, address, page)
   }
 
   static async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {

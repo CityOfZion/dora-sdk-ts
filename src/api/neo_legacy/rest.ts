@@ -9,7 +9,9 @@ import type {
   ContractsResponse,
   ContractTransfersResponse,
   GetAddressAbstractsResponse,
-  GetAllNodesResponse, GetClaimableResponse, GetUnclaimedResponse,
+  GetAllNodesResponse,
+  GetClaimableResponse,
+  GetUnclaimedResponse,
   HeightResponse,
   InvocationStatsResponse,
   LogResponse,
@@ -90,8 +92,9 @@ export class NeoLegacyREST {
 
   static async contractStats(
     contractHash: string,
-    network = 'mainnet'): Promise<Object> {
-    const method = "contract_stats"
+    network = 'mainnet'
+  ): Promise<Object> {
+    const method = 'contract_stats'
     return await this.get(network, method)
   }
 

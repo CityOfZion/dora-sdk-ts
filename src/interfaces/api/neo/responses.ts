@@ -1,13 +1,15 @@
 import {
+  AddressAbstractEntry,
   Asset,
+  ContractInvocationStats,
   Balance,
   Block,
   NodeMetaData,
+  TransferAbstract,
   TypedResponse,
   Witness
 } from '../common'
-import {Contract, Manifest, NEF, Token, Transaction} from './interface'
-import {ContractInvocationStats, TransferAbstract} from '../neo_legacy'
+import { Contract, Manifest, NEF, Token, Transaction } from './interface'
 
 export type AssetResponse = Token
 
@@ -53,6 +55,14 @@ export interface ContractResponse {
 export interface ContractsResponse {
   items: Contract[]
   totalCount: number
+}
+
+export interface GetAddressAbstractsResponse {
+  total_pages: number
+  total_entries: number
+  page_size: number
+  page_number: number
+  entries: AddressAbstractEntry[]
 }
 
 export type GetAllNodesResponse = NodeMetaData[]

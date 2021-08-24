@@ -1,18 +1,24 @@
 import {
-  AddressAbstractEntry,
   ApplicationLog,
-  Asset, ClaimableEvent,
-  ContractInvocationStats,
+  Asset,
+  ClaimableEvent,
   ContractMetaData,
   ContractState,
   ContractStorage,
   ContractTransfer,
   InputOutput,
   TimedBalance,
-  Transaction,
-  TransferAbstract
+  Transaction
 } from './interface'
-import { Balance, Block, NodeMetaData, Witness } from '../common'
+import {
+  AddressAbstractEntry,
+  Balance,
+  Block,
+  ContractInvocationStats,
+  NodeMetaData,
+  TransferAbstract,
+  Witness
+} from '../common'
 
 export type AddressStatsResponse = {
   asset: string
@@ -97,15 +103,6 @@ export type InvocationStatsResponse = ContractInvocationStats[]
 
 export interface LogResponse {
   Item: ApplicationLog
-}
-
-export interface StatsResponse {
-  transactions: number
-  addresses: number
-  assets: number
-  contracts: number
-  transfers: number
-  height: number
 }
 
 export interface StorageResponse {
