@@ -31,7 +31,7 @@ export interface BlockResponse {
   primary: number
   nextconsensus: string
   witness: Witness[]
-  tx: string[]
+  tx: Transaction[]
   blocktime: number
   jsonsize: number
   txCount: number

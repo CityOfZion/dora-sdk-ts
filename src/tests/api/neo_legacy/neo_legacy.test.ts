@@ -7,7 +7,7 @@ describe('neo legacy', () => {
       'AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M'
     )
     assert.isNotNull(res)
-    assert.strictEqual(res.length, 10)
+    assert.strictEqual(res.length, 13)
   })
 
   it("should get an address' abstract fields", async () => {
