@@ -7,12 +7,12 @@ describe('neo legacy', () => {
       'AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M'
     )
     assert.isNotNull(res)
-    assert.strictEqual(res.length, 10)
-  })
+    assert.strictEqual(res.length, 14)
+  }).timeout(60000)
 
   it("should get an address' abstract fields", async () => {
     const res = await NeoLegacyREST.getAddressAbstracts(
-      'AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M'
+      'ANeo2toNeo3MigrationAddressxwPB2Hz'
     )
     assert.isNotNull(res)
     assert.strictEqual(res.entries.length, 15)
