@@ -36,6 +36,51 @@ export interface Event {
   parameters: Parameter[]
 }
 
+export interface InvocationDetails {
+  type: string
+  metadata: InvocationDetailNEP17Transfer |
+    InvocationDetailNEP11Transfer |
+    InvocationDetailContractInvocation |
+    InvocationDetailVote
+}
+
+export interface InvocationDetailContractInvocation {
+  summary: string
+  contract_name: string
+  scripthash: string
+  method: string
+}
+
+export interface InvocationDetailNEP11Transfer {
+  summary: string
+  symbol: string
+  contract_name: string
+  scripthash: string
+  to: string
+  token_id: string
+  data: string
+}
+
+export interface InvocationDetailNEP17Transfer {
+  summary: string
+  symbol: string
+  contract_name: string
+  scripthash: string
+  from: string
+  to: string
+  amount: number
+  data: string
+}
+
+export interface InvocationDetailVote {
+  summary: string
+  contract_name: string
+  scripthash: string
+  voter: string
+  candidate: string
+  candidate_name: string
+}
+
 export interface Manifest {
   abi?: ABI
   extra: {
@@ -112,4 +157,15 @@ export interface Transaction {
   validuntilblock?: number
   version?: number
   witness?: Witness
+}
+
+export interface TransactionEnhanced {
+  hash: string
+  sender: string
+  sysfee: string
+  netfee: string
+  block: number
+  time: string
+  vmstate: string
+  invocations: InvocationDetails[]
 }

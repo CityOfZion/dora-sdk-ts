@@ -9,7 +9,12 @@ import {
   TypedResponse,
   Witness
 } from '../common'
-import { Contract, Manifest, NEF, Token, Transaction } from './interface'
+import {Contract, Manifest, NEF, Token, Transaction, TransactionEnhanced} from './interface'
+
+export interface AddressTransactionsResponse {
+  items: TransactionEnhanced[]
+  totalCount: number
+}
 
 export type AssetResponse = Token
 
