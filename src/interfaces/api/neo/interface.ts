@@ -97,6 +97,7 @@ export interface Token {
 }
 
 export interface Transaction {
+  _id: string
   attributes?: any[]
   block: number
   hash: string
@@ -111,5 +112,5 @@ export interface Transaction {
   time: string
   validuntilblock?: number
   version?: number
-  witness?: Witness
+  witnesses?: Witness[]
 }

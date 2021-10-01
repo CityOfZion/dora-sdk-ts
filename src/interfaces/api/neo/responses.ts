@@ -27,6 +27,7 @@ export interface BlockResponse {
   previousBlockHash: string
   merkleroot: string
   time: string
+  nonce: string
   index: number
   primary: number
   nextconsensus: string

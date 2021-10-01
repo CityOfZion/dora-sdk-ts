@@ -43,6 +43,7 @@ describe('neo sdk', () => {
 
   it('should get a block with transactions', async () => {
     const res = await NeoRest.block(290939, 'testnet_rc4')
+    console.log(res)
     assert.isNotNull(res)
     assert.isObject(res)
     assert.strictEqual(
