@@ -68,13 +68,13 @@ describe('neo sdk', () => {
 
   it('should get contract stats', async () => {
     const res = (await NeoRest.contractStats(
-      '0xbf2d0fb512ace4cee9ee775b0aa6b9a498055e60',
-      'testnet'
+      '0x5a82be96f042df27d8f37f237805796af6fbbf74',
+      'testnet_rc4'
     )) as any
     assert.isNotNull(res)
     // validated that this was still a typeof Object TS is weird about bracket notation so had to typescript above
     assert.isObject(res)
-    assert.strictEqual(res['20210715'], 3)
+    assert.strictEqual(res['20210910'], 1)
   })
 
   it('should get nodes', async () => {
