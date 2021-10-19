@@ -136,6 +136,14 @@ describe('neo sdk', () => {
     assert.strictEqual(res.items.length, 15)
   })
 
+  it('should get the enhanced transactions for an address', async () => {
+    const res = await NeoRest.addressTransactions('NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa', 1)
+    assert.isNotNull(res)
+    assert.isObject(res)
+    assert.isArray(res.items)
+    assert.isAtLeast(res.items.length, 14)
+  })
+
   it('should get transfer history', async () => {
     const res = await NeoRest.transferHistory(
       'NeFM2R8bq9c5q9bvsoargVH4MifMrXDikH',

@@ -1,4 +1,5 @@
 import type {
+  AddressTransactionsResponse,
   AssetResponse,
   BalanceResponse,
   BlockResponse,
@@ -18,6 +19,15 @@ import { AXIOS_DORA } from '../../constants'
 
 export class NeoRest {
   static axios = AXIOS_DORA('neo')
+
+  static async addressTransactions(
+    address: string,
+    page = 1,
+    network = 'mainnet'
+  ): Promise<AddressTransactionsResponse> {
+    const method = 'address_transactions'
+    return await this.get(network, method, address, page)
+  }
 
   static async asset(
     assetHash: string,
