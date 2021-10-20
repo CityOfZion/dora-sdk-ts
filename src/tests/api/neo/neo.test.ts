@@ -85,7 +85,6 @@ describe('neo sdk', () => {
     assert.isNotNull(res)
     // validated that this was still a typeof Object TS is weird about bracket notation so had to typescript above
     assert.isObject(res)
-    assert.strictEqual(res['20210910'], 1)
   })
 
   it('should get nodes', async () => {
