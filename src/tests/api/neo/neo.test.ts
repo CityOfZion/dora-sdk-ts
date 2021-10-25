@@ -163,4 +163,10 @@ describe('neo sdk', () => {
     assert.isNotNull(res)
     assert.isObject(res)
   })
+
+  it('should get Neo committee information', async () => {
+    const res = await NeoRest.committee()
+    assert.isNotNull(res)
+    assert.isArray(res)
+  })
 })

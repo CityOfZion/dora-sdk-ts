@@ -55,6 +55,21 @@ export interface BlocksResponse {
   totalCount: number
 }
 
+export interface Committee {
+  scripthash: string
+  name: string
+  location: string
+  website: string
+  email: string
+  github: string
+  telegram: string
+  twitter: string
+  description: string
+  logo: string
+  votes: number
+  pubkey: string
+}
+
 export interface ContractResponse {
   block: number
   hash: string
