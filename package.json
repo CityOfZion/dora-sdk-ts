@@ -16,7 +16,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "test": "mocha 'src/**/*.test.ts'",
-    "fmt": "prettier --write '**/**/*.ts'"
+    "fmt": "prettier --write ./src/**/*.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.2.21",

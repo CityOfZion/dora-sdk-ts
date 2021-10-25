@@ -3,6 +3,7 @@
     "module": "commonjs",
     "lib": ["es2015", "dom"],
     "declaration": true,
+    "baseUrl": ".",
     "sourceMap": true,
     "outDir": "dist",
     "rootDir": "src",

@@ -9,7 +9,14 @@ import {
   TypedResponse,
   Witness
 } from '../common'
-import {Contract, Manifest, NEF, Token, Transaction, TransactionEnhanced} from './interface'
+import {
+  Contract,
+  Manifest,
+  NEF,
+  Token,
+  Transaction,
+  TransactionEnhanced
+} from './interface'
 
 export interface AddressTransactionsResponse {
   items: TransactionEnhanced[]
@@ -100,4 +107,11 @@ export interface TransactionsResponse {
 export interface TransferHistoryResponse {
   items: TransferAbstract[]
   totalCount: number
+}
+
+export interface VoterResponse {
+  vote: string
+  candidate: string
+  candidatePubbkey: string
+  balance: number
 }

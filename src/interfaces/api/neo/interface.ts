@@ -38,10 +38,11 @@ export interface Event {
 
 export interface InvocationDetails {
   type: string
-  metadata: InvocationDetailNEP17Transfer |
-    InvocationDetailNEP11Transfer |
-    InvocationDetailContractInvocation |
-    InvocationDetailVote
+  metadata:
+    | InvocationDetailNEP17Transfer
+    | InvocationDetailNEP11Transfer
+    | InvocationDetailContractInvocation
+    | InvocationDetailVote
 }
 
 export interface InvocationDetailContractInvocation {

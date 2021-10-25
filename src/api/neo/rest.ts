@@ -13,7 +13,8 @@ import type {
   LogResponse,
   TransactionResponse,
   TransactionsResponse,
-  TransferHistoryResponse
+  TransferHistoryResponse,
+  VoterResponse
 } from '../../interfaces/api/neo'
 import { AXIOS_DORA } from '../../constants'
 
@@ -144,6 +145,14 @@ export class NeoRest {
   ): Promise<TransferHistoryResponse> {
     const method = 'transfer_history'
     return await this.get(network, method, address, page)
+  }
+
+  static async voter(
+    address: string,
+    network = 'mainnet'
+  ): Promise<VoterResponse> {
+    const method = 'voter'
+    return await this.get(network, method, address)
   }
 
   private static async get(...args: any[]) {

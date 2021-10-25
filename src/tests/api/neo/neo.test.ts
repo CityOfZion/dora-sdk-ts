@@ -136,7 +136,10 @@ describe('neo sdk', () => {
   })
 
   it('should get the enhanced transactions for an address', async () => {
-    const res = await NeoRest.addressTransactions('NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa', 1)
+    const res = await NeoRest.addressTransactions(
+      'NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa',
+      1
+    )
     assert.isNotNull(res)
     assert.isObject(res)
     assert.isArray(res.items)
@@ -153,5 +156,11 @@ describe('neo sdk', () => {
     assert.isObject(res)
     assert.isArray(res.items)
     assert.strictEqual(res.items.length, 15)
+  })
+
+  it('should get the voter information of a user', async () => {
+    const res = await NeoRest.voter('NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa')
+    assert.isNotNull(res)
+    assert.isObject(res)
   })
 })
