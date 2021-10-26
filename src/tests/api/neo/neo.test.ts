@@ -169,4 +169,15 @@ describe('neo sdk', () => {
     assert.isNotNull(res)
     assert.isArray(res)
   })
+
+  it('should get the full transactions history for an address', async () => {
+    const res = await NeoRest.addressTXFull(
+      'NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa',
+      1
+    )
+    assert.isNotNull(res)
+    assert.isObject(res)
+    assert.isArray(res.items)
+    assert.isAtLeast(res.items.length, 14)
+  })
 })

@@ -23,6 +23,8 @@ export interface AddressTransactionsResponse {
   totalCount: number
 }
 
+export type AddressTXFullResponse = AddressTransactionsResponse
+
 export type AssetResponse = Token
 
 export interface AssetsResponse {

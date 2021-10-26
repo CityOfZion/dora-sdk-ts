@@ -1,5 +1,5 @@
 import type {
-  AddressTransactionsResponse,
+  AddressTransactionsResponse, AddressTXFullResponse,
   AssetResponse,
   BalanceResponse,
   BlockResponse,
@@ -27,6 +27,15 @@ export class NeoRest {
     network = 'mainnet'
   ): Promise<AddressTransactionsResponse> {
     const method = 'address_transactions'
+    return await this.get(network, method, address, page)
+  }
+
+  static async addressTXFull(
+    address: string,
+    page = 1,
+    network = 'mainnet'
+  ): Promise<AddressTXFullResponse> {
+    const method = 'address_txfull'
     return await this.get(network, method, address, page)
   }
 
