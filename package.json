@@ -1,6 +1,6 @@
 {
   "name": "@cityofzion/dora-ts",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
@@ -16,7 +16,9 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "test": "mocha 'src/**/*.test.ts'",
-    "fmt": "prettier --write ./src/**/*.ts"
+    "fmt": "prettier --write ./src/**/*.ts",
+    "buildDocs": "typedoc --out docs/",
+    "publishDocs": "aws sy sync ./docs s3://neoscan/prod/documentation --acl public-read "
   },
   "devDependencies": {
     "@types/chai": "^4.2.21",
@@ -26,6 +28,7 @@
     "prettier": "^2.3.2",
     "rimraf": "^3.0.2",
     "ts-node": "^10.1.0",
+    "typedoc": "^0.22.7",
     "typescript": "^4.3.5"
   },
   "dependencies": {

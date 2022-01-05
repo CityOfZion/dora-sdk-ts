@@ -162,12 +162,25 @@ export interface Transaction {
 }
 
 export interface TransactionEnhanced {
+  block: number
   hash: string
+  invocations: InvocationDetails[]
+  netfee: string
+  notifications: Notification[]
   sender: string
   sysfee: string
-  netfee: string
-  block: number
   time: string
+  transfers: Transfer[]
   vmstate: string
-  invocations: InvocationDetails[]
+}
+
+export interface Transfer {
+  from: string
+  to: string
+  time: string
+  scripthash: string
+  amount: string
+  block: number
+  txid: string
+  transferindex: string
 }
