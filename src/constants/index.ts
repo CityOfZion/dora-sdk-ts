@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const DORA_URL = 'https://dora.coz.io'
 
-export const AXIOS_DORA = (version: string, timeout: number = 1000): AxiosInstance => {
+export const AXIOS_DORA = (version: string, timeout: number = 5000): AxiosInstance => {
   let endpoint: string = ''
 
   if (version === 'neoLegacy') {
