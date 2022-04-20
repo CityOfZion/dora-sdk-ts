@@ -13,6 +13,7 @@ export const AXIOS_DORA = (version: string): AxiosInstance => {
   }
 
   return axios.create({
-    baseURL: DORA_URL + endpoint
+    baseURL: DORA_URL + endpoint,
+    timeout: timeout
   })
 }
