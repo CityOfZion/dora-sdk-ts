@@ -1,9 +1,9 @@
-import type { AxiosInstance } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
 export const DORA_URL = 'https://dora.coz.io'
 
-export const AXIOS_DORA = (version: string, timeout: number = 5000): AxiosInstance => {
+export const AXIOS_DORA = (version: string, config?: AxiosRequestConfig): AxiosInstance => {
   let endpoint: string = ''
 
   if (version === 'neoLegacy') {
@@ -12,8 +12,11 @@ export const AXIOS_DORA = (version: string, timeout: number = 5000): AxiosInstan
     endpoint = '/api/v1/neo3'
   }
 
-  return axios.create({
-    baseURL: DORA_URL + endpoint,
-    timeout: timeout
-  })
+  if (typeof config === 'undefined') {
+    config = { baseURL: DORA_URL + endpoint};
+  } else {
+    config["baseURL"] = DORA_URL + endpoint;
+  }
+
+  return axios.create(config);
 }
