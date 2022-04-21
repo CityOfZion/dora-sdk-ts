@@ -13,7 +13,7 @@ export const AXIOS_DORA = (version: string, config?: AxiosRequestConfig): AxiosI
   }
 
   if (typeof config === 'undefined') {
-    config = { baseURL: DORA_URL + endpoint};
+    config = { baseURL: DORA_URL + endpoint };
   } else {
     config["baseURL"] = DORA_URL + endpoint;
   }
