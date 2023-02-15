@@ -27,7 +27,7 @@ const DefaultRestConfig: RestConfig = {
   endpoint: '/api/v1/neo3'
 }
 
-export class NeoRestApi {
+export class NeoRESTApi {
   protected axios: AxiosInstance;
   public constructor(restConfig: RestConfig = DefaultRestConfig, axiosConfig?: AxiosRequestConfig) {
     if (typeof axiosConfig === 'undefined') {
@@ -193,4 +193,4 @@ export class NeoRestApi {
   }
 }
 
-export const NeoRest = new NeoRestApi()
+export const NeoRest = new NeoRESTApi()
