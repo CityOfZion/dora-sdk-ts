@@ -1,7 +1,6 @@
 import { assert } from 'chai'
-import { NeoLegacyREST as NeoLegacyRESTClass } from '../../../api/neo_legacy'
+import { NeoLegacyREST } from '../../../api/neo_legacy'
 
-const NeoLegacyREST = new NeoLegacyRESTClass()
 describe('neo legacy', () => {
   // timeout
   // it('should get address_stats', async () => {

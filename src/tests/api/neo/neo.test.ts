@@ -1,8 +1,7 @@
 import { assert } from 'chai'
-import { NeoRest as NeoRestClass } from '../../../api/neo'
+import { NeoRest } from '../../../api/neo'
 
 
-const NeoRest = new NeoRestClass()
 describe('neo sdk', () => {
   it('should get an asset', async () => {
     const res = await NeoRest.asset(

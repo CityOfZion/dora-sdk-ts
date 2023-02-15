@@ -31,7 +31,7 @@ const DefaultLegacyRestConfig: RestConfig = {
   endpoint: '/api/v1/neo2'
 }
 
-export class NeoLegacyREST {
+export class NeoLegacyRESTApi {
   protected axios: AxiosInstance;
   public constructor(restConfig: RestConfig = DefaultLegacyRestConfig, axiosConfig?: AxiosRequestConfig) {
     if (typeof axiosConfig === 'undefined') {
@@ -220,3 +220,5 @@ export class NeoLegacyREST {
     return data
   }
 }
+
+export const NeoLegacyREST = new NeoLegacyRESTApi()
