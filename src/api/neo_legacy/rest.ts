@@ -21,12 +21,28 @@ import type {
   TransactionsResponse,
   TransferHistoryResponse
 } from '../../interfaces/api/neo_legacy'
-import { AXIOS_DORA } from '../../constants'
+import type { RestConfig } from "../../interfaces";
+import {DORA_URL} from '../../constants'
+import type { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios from 'axios'
+
+const DefaultLegacyRestConfig: RestConfig = {
+  doraUrl: DORA_URL,
+  endpoint: '/api/v1/neo2'
+}
 
 export class NeoLegacyREST {
-  static axios = AXIOS_DORA('neoLegacy')
+  protected axios: AxiosInstance;
+  public constructor(restConfig: RestConfig = DefaultLegacyRestConfig, axiosConfig?: AxiosRequestConfig) {
+    if (typeof axiosConfig === 'undefined') {
+      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint };
+    } else {
+      axiosConfig["baseURL"] = restConfig.doraUrl + restConfig.endpoint;
+    }
+    this.axios = axios.create(axiosConfig)
+  }
 
-  static async addressStats(
+  async addressStats(
     address: string,
     network = 'mainnet'
   ): Promise<AddressStatsResponse> {
@@ -34,7 +50,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, address)
   }
 
-  static async asset(
+  async asset(
     assetHash: string,
     network = 'mainnet'
   ): Promise<AssetResponse> {
@@ -42,7 +58,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, assetHash)
   }
 
-  static async assets(
+  async assets(
     page: number = 1,
     network = 'mainnet'
   ): Promise<AssetsResponse> {
@@ -50,7 +66,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, page)
   }
 
-  static async balance(
+  async balance(
     address: string,
     network = 'mainnet'
   ): Promise<BalanceResponse> {
@@ -58,7 +74,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, address)
   }
 
-  static async block(
+  async block(
     blockHash: string,
     network = 'mainnet'
   ): Promise<BlockResponse> {
@@ -66,7 +82,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, blockHash)
   }
 
-  static async blocks(
+  async blocks(
     page: number = 1,
     network = 'mainnet'
   ): Promise<BlocksResponse> {
@@ -74,7 +90,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, page)
   }
 
-  static async contract(
+  async contract(
     contractHash: string,
     network = 'mainnet'
   ): Promise<ContractResponse> {
@@ -82,7 +98,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, contractHash)
   }
 
-  static async contracts(
+  async contracts(
     page: number,
     network = 'mainnet'
   ): Promise<ContractsResponse> {
@@ -90,7 +106,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, page)
   }
 
-  static async contractStats(
+  async contractStats(
     contractHash: string,
     network = 'mainnet'
   ): Promise<Object> {
@@ -98,7 +114,7 @@ export class NeoLegacyREST {
     return await this.get(network, method)
   }
 
-  static async contractTransfers(
+  async contractTransfers(
     contractHash: string,
     page: number = 1,
     network = 'mainnet'
@@ -107,7 +123,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, contractHash, page)
   }
 
-  static async getAddressAbstracts(
+  async getAddressAbstracts(
     address: string,
     page = 1,
     network = 'mainnet'
@@ -116,12 +132,12 @@ export class NeoLegacyREST {
     return await this.get(network, method, address, page)
   }
 
-  static async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
+  async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
     return await this.get(network, method)
   }
 
-  static async getClaimable(
+  async getClaimable(
     address: string,
     network = 'mainnet'
   ): Promise<GetClaimableResponse> {
@@ -129,7 +145,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, address)
   }
 
-  static async getUnclaimed(
+  async getUnclaimed(
     address: string,
     network = 'mainnet'
   ): Promise<GetUnclaimedResponse> {
@@ -137,19 +153,19 @@ export class NeoLegacyREST {
     return await this.get(network, method, address)
   }
 
-  static async height(network = 'mainnet'): Promise<HeightResponse> {
+  async height(network = 'mainnet'): Promise<HeightResponse> {
     const method = 'height'
     return await this.get(network, method)
   }
 
-  static async invocationStats(
+  async invocationStats(
     network = 'mainnet'
   ): Promise<InvocationStatsResponse> {
     const method = 'invocation_stats'
     return await this.get(network, method)
   }
 
-  static async log(
+  async log(
     contractHash: string,
     network = 'mainnet'
   ): Promise<LogResponse> {
@@ -157,7 +173,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, contractHash)
   }
 
-  static async storage(
+  async storage(
     blockHash: string,
     network = 'mainnet'
   ): Promise<StorageResponse> {
@@ -165,7 +181,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, blockHash)
   }
 
-  static async transaction(
+  async transaction(
     txid: string,
     network = 'mainnet'
   ): Promise<TransactionResponse> {
@@ -173,7 +189,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, txid)
   }
 
-  static async transactions(
+  async transactions(
     page: number = 1,
     network = 'mainnet'
   ): Promise<TransactionsResponse> {
@@ -181,7 +197,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, page)
   }
 
-  static async transactionAbstracts(
+  async transactionAbstracts(
     txid: string,
     network = 'mainnet'
   ): Promise<TransactionAbstractsResponse> {
@@ -189,7 +205,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, txid)
   }
 
-  static async transferHistory(
+  async transferHistory(
     address: string,
     page: number = 1,
     network = 'mainnet'
@@ -198,7 +214,7 @@ export class NeoLegacyREST {
     return await this.get(network, method, address, page)
   }
 
-  private static async get(...args: any[]) {
+  private async get(...args: any[]) {
     const endpoint = args.join('/')
     const { data } = await this.axios.get(`/${endpoint}`)
     return data
