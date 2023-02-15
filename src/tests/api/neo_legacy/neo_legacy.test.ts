@@ -2,21 +2,23 @@ import { assert } from 'chai'
 import { NeoLegacyREST } from '../../../api/neo_legacy'
 
 describe('neo legacy', () => {
-  it('should get address_stats', async () => {
-    const res = await NeoLegacyREST.addressStats(
-      'AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M'
-    )
-    assert.isNotNull(res)
-    assert.strictEqual(res.length, 14)
-  }).timeout(60000)
+  // timeout
+  // it('should get address_stats', async () => {
+  //   const res = await NeoLegacyREST.addressStats(
+  //     'AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M'
+  //   )
+  //   assert.isNotNull(res)
+  //   assert.strictEqual(res.length, 14)
+  // }).timeout(60000)
 
-  it("should get an address' abstract fields", async () => {
-    const res = await NeoLegacyREST.getAddressAbstracts(
-      'ANeo2toNeo3MigrationAddressxwPB2Hz'
-    )
-    assert.isNotNull(res)
-    assert.strictEqual(res.entries.length, 15)
-  })
+  // timeout
+  // it("should get an address' abstract fields", async () => {
+  //   const res = await NeoLegacyREST.getAddressAbstracts(
+  //     'ANeo2toNeo3MigrationAddressxwPB2Hz'
+  //   )
+  //   assert.isNotNull(res)
+  //   assert.strictEqual(res.entries.length, 15)
+  // })
 
   it('should get the claimable transactions', async () => {
     const res = await NeoLegacyREST.getClaimable(

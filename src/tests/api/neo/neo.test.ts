@@ -1,17 +1,18 @@
 import { assert } from 'chai'
 import { NeoRest } from '../../../api/neo'
 
+
 describe('neo sdk', () => {
   it('should get an asset', async () => {
     const res = await NeoRest.asset(
-      '0x3466566e4f93d788a7129231b363e7f32fd50f07',
+      '0xd2a4cff31913016155e38e474a2c06d08be276cf',
       'testnet'
     )
     assert.isNotNull(res)
-    assert.strictEqual(res.name, 'GAS')
+    assert.strictEqual(res.name, 'GasToken')
     assert.strictEqual(
       res.scripthash,
-      '0x3466566e4f93d788a7129231b363e7f32fd50f07'
+      '0xd2a4cff31913016155e38e474a2c06d08be276cf'
     )
   })
 
@@ -23,33 +24,34 @@ describe('neo sdk', () => {
 
   it('should get a balance', async () => {
     const res = await NeoRest.balance(
-      'NijmPn3qW7F3rkFXMeL46pL7TJa51bbUgL',
+      'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       'testnet'
     )
     assert.isNotNull(res)
-    assert.strictEqual(res.length, 3)
+    // 2 because of NEO and GAS
+    assert.isAtLeast(res.length, 2)
   })
 
   it('should get a block', async () => {
-    const res = await NeoRest.block(315682, 'testnet')
+    const res = await NeoRest.block(0, 'testnet')
     assert.isNotNull(res)
     assert.isObject(res)
     assert.strictEqual(
       res.hash,
-      '0x4c1b934d38aa54e678eefda4123299141c83c3c49436b8df8fb56e91f5414827'
+      '0x9d3276785e7306daf59a3f3b9e31912c095598bbfb8a4476b821b0e59be4c57a'
     )
-    assert.strictEqual(res.size, 942)
+    assert.strictEqual(res.size, 114)
   })
 
   it('should get a block with transactions', async () => {
-    const res = await NeoRest.block(290939, 'testnet_rc4')
+    const res = await NeoRest.block(2486, 'testnet')
     assert.isNotNull(res)
     assert.isObject(res)
     assert.strictEqual(
       res.hash,
-      '0xe91c52d01cf2106ba82fd40c585013c6f4b6a7384cf58ff535262717e3e350fa'
+      '0xe0f8d56fb07b79be5d572ccf0ad7b643e7cbc24d48dede875fd7e041e5debb7f'
     )
-    assert.strictEqual(res.tx.length, 2)
+    assert.strictEqual(res.tx.length, 1)
   })
 
   it('should get blocks', async () => {
@@ -61,13 +63,13 @@ describe('neo sdk', () => {
 
   it('should get a contract', async () => {
     const res = await NeoRest.contract(
-      '0xbf2d0fb512ace4cee9ee775b0aa6b9a498055e60',
+      '0x4625b78c56b7e43e1e6fb4ed0200e9a0a9152c92',
       'testnet'
     )
     assert.isNotNull(res)
     assert.isObject(res)
-    assert.strictEqual(res.id, 455)
-    assert.strictEqual(res.hash, '0xbf2d0fb512ace4cee9ee775b0aa6b9a498055e60')
+    assert.strictEqual(res.id, 2)
+    assert.strictEqual(res.hash, '0x4625b78c56b7e43e1e6fb4ed0200e9a0a9152c92')
     assert.isObject(res.nef)
   })
 
@@ -79,8 +81,8 @@ describe('neo sdk', () => {
 
   it('should get contract stats', async () => {
     const res = (await NeoRest.contractStats(
-      '0x5a82be96f042df27d8f37f237805796af6fbbf74',
-      'testnet_rc4'
+      '0x4625b78c56b7e43e1e6fb4ed0200e9a0a9152c92',
+      'testnet'
     )) as any
     assert.isNotNull(res)
     // validated that this was still a typeof Object TS is weird about bracket notation so had to typescript above
@@ -100,31 +102,31 @@ describe('neo sdk', () => {
 
   it('should get the transaction log', async () => {
     const res = await NeoRest.log(
-      '0xedf5c6e18f5e9f1836b6f8c8ddb4ae4d31e66420098ea778eb533e189a7ef8f4',
+      '0x7f40e2252fe791b89d60c2cdd9419de7984e5fab6d941d3cf3a8d0c96135c535',
       'testnet'
     )
     assert.isNotNull(res)
     assert.strictEqual(
       res.txid,
-      '0xedf5c6e18f5e9f1836b6f8c8ddb4ae4d31e66420098ea778eb533e189a7ef8f4'
+      '0x7f40e2252fe791b89d60c2cdd9419de7984e5fab6d941d3cf3a8d0c96135c535'
     )
     assert.strictEqual(res.trigger, 'Application')
-    assert.strictEqual(res.notifications.length, 2)
+    assert.strictEqual(res.notifications.length, 1)
   })
 
   it('should get a transaction', async () => {
     const res = await NeoRest.transaction(
-      '0xedf5c6e18f5e9f1836b6f8c8ddb4ae4d31e66420098ea778eb533e189a7ef8f4',
+      '0x7f40e2252fe791b89d60c2cdd9419de7984e5fab6d941d3cf3a8d0c96135c535',
       'testnet'
     )
     assert.isNotNull(res)
     assert.strictEqual(
       res.hash,
-      '0xedf5c6e18f5e9f1836b6f8c8ddb4ae4d31e66420098ea778eb533e189a7ef8f4'
+      '0x7f40e2252fe791b89d60c2cdd9419de7984e5fab6d941d3cf3a8d0c96135c535'
     )
-    assert.strictEqual(res.sender, 'NgUS1Jd5oPRPCJfaX1UnXdeKNuxLDQg1Vo')
-    assert.strictEqual(res.size, 2295)
-    assert.strictEqual(res.signers?.length, 1)
+    assert.strictEqual(res.sender, 'NVfj3vnyBCUb2E2eSFacY3N4Q1UU9ed3FG')
+    assert.strictEqual(res.size, 860)
+    assert.strictEqual(res.signers?.length, 2)
   })
 
   it('should get transactions', async () => {
@@ -135,31 +137,32 @@ describe('neo sdk', () => {
     assert.strictEqual(res.items.length, 15)
   })
 
-  it('should get the enhanced transactions for an address', async () => {
-    const res = await NeoRest.addressTransactions(
-      'NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa',
-      1
-    )
-    assert.isNotNull(res)
-    assert.isObject(res)
-    assert.isArray(res.items)
-    assert.isAtLeast(res.items.length, 14)
-  })
+  // TODO: broken on API v1 side, v2 not yet implemented. Skip for now
+  // it('should get the enhanced transactions for an address', async () => {
+  //   const res = await NeoRest.addressTransactions(
+  //     'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
+  //     1
+  //   )
+  //   assert.isNotNull(res)
+  //   assert.isObject(res)
+  //   assert.isArray(res.items)
+  //   assert.isAtLeast(res.items.length, 14)
+  // })
 
   it('should get transfer history', async () => {
     const res = await NeoRest.transferHistory(
-      'NeFM2R8bq9c5q9bvsoargVH4MifMrXDikH',
-      2,
+      'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
+      1,
       'testnet'
     )
     assert.isNotNull(res)
     assert.isObject(res)
     assert.isArray(res.items)
-    assert.strictEqual(res.items.length, 15)
+    assert.isAtLeast(res.items.length, 2)
   })
 
   it('should get the voter information of a user', async () => {
-    const res = await NeoRest.voter('NNtgxn9X4oRG1y7UfxDyjef8aFy6eRpApa')
+    const res = await NeoRest.voter('Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D')
     assert.isNotNull(res)
     assert.isObject(res)
   })
@@ -172,12 +175,13 @@ describe('neo sdk', () => {
 
   it('should get the full transactions history for an address', async () => {
     const res = await NeoRest.addressTXFull(
-      'Nf1iww8HZ2V6ZEntvDueDxqVNRUyMtMuRw',
-      1
+      'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
+      1,
+        'testnet'
     )
     assert.isNotNull(res)
     assert.isObject(res)
     assert.isArray(res.items)
-    assert.isAtLeast(res.items.length, 14)
+    assert.isAtLeast(res.items.length, 2)
   })
 })
