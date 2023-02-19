@@ -47,6 +47,9 @@ export class NeoRESTApi {
     return await this.get(network, method, address, page)
   }
 
+  /**
+   * @deprecated use addressTransactions instead.
+   */
   async addressTXFull(
     address: string,
     page = 1,
