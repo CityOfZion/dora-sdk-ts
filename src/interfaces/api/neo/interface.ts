@@ -36,8 +36,15 @@ export interface Event {
   parameters: Parameter[]
 }
 
+export enum InvocationType {
+  NEP17_TRANSFER = 'nep17_transfer',
+  NEP11_TRANSFER = 'nep11_transfer',
+  CONTRACT = 'contract_invocation',
+  VOTE = 'vote'
+}
+
 export interface InvocationDetails {
-  type: string
+  type: InvocationType
   metadata:
     | InvocationDetailNEP17Transfer
     | InvocationDetailNEP11Transfer
