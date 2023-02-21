@@ -39,7 +39,7 @@ export interface Event {
 export enum InvocationType {
   NEP17_TRANSFER = 'nep17_transfer',
   NEP11_TRANSFER = 'nep11_transfer',
-  CONTRACT = 'contract_invocation',
+  CONTRACT_INVOCATION = 'contract_invocation',
   VOTE = 'vote'
 }
 
