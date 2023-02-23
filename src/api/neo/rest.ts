@@ -7,7 +7,6 @@ import type {
   BlocksResponse,
   ContractResponse,
   ContractsResponse,
-  GetAddressAbstractsResponse,
   GetAllNodesResponse,
   HeightResponse,
   InvocationStatsResponse,
@@ -120,15 +119,6 @@ export class NeoRESTApi {
   ): Promise<Object> {
     const method = 'contract_stats'
     return await this.get(network, method, contractHash)
-  }
-
-  async getAddressAbstracts(
-    address: string,
-    page = 1,
-    network = 'mainnet'
-  ): Promise<GetAddressAbstractsResponse> {
-    const method = 'get_address_abstracts'
-    return await this.get(network, method, address, page)
   }
 
   async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {

@@ -1,5 +1,4 @@
 import {
-  AddressAbstractEntry,
   Asset,
   ContractInvocationStats,
   Balance,
@@ -85,14 +84,6 @@ export interface ContractResponse {
 export interface ContractsResponse {
   items: Contract[]
   totalCount: number
-}
-
-export interface GetAddressAbstractsResponse {
-  total_pages: number
-  total_entries: number
-  page_size: number
-  page_number: number
-  entries: AddressAbstractEntry[]
 }
 
 export type GetAllNodesResponse = NodeMetaData[]
