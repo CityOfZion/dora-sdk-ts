@@ -59,7 +59,7 @@ export interface TransferAbstract {
 
 export interface TypedResponse {
   type: string
-  value: any
+  value?: string
 }
 
 export interface Witness {
