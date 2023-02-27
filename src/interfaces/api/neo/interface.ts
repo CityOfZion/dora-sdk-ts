@@ -123,7 +123,7 @@ export interface NEF {
 export interface Notification {
   contract: string
   event_name: string
-  state: TypedResponse
+  state: TypedResponse[]
 }
 
 export interface Parameter {
