@@ -63,6 +63,7 @@ export class NeoRESTApi {
     return await this.get(network, method, assetHash)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async assets(page: number = 1, network = 'mainnet'): Promise<any> {
     const method = 'assets'
     return await this.get(network, method, page)
@@ -116,7 +117,8 @@ export class NeoRESTApi {
   async contractStats(
     contractHash: string,
     network = 'mainnet'
-  ): Promise<Object> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): Promise<any> {
     const method = 'contract_stats'
     return await this.get(network, method, contractHash)
   }
@@ -176,7 +178,7 @@ export class NeoRESTApi {
     return await this.get(network, method, address)
   }
 
-  private async get(...args: any[]) {
+  private async get(...args: unknown[]) {
     const endpoint = args.join('/')
     const { data } = await this.axios.get(`/${endpoint}`)
     return data

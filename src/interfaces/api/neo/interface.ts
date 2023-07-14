@@ -96,8 +96,8 @@ export interface Manifest {
     Description: string
     Email?: string
   }
-  features?: any
-  groups?: any
+  features?: unknown
+  groups?: unknown
   name: string
   permissions?: Permission[]
   supportedstandards?: string[]
@@ -151,7 +151,7 @@ export interface Token {
 
 export interface Transaction {
   _id: string
-  attributes?: any[]
+  attributes?: unknown[]
   block: number
   hash: string
   jsonsize?: number

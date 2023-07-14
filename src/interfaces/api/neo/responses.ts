@@ -95,7 +95,7 @@ export interface HeightResponse {
 export type InvocationStatsResponse = ContractInvocationStats[]
 
 export interface LogResponse {
-  exception?: any
+  exception?: unknown
   gas_consumed: string
   notifications: Notification[]
   stack: TypedResponse[]
