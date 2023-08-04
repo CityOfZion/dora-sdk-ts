@@ -12,7 +12,7 @@ describe('neo sdk', () => {
     assert.strictEqual(res.name, 'GasToken')
     assert.strictEqual(
       res.scripthash,
-      '0xd2a4cff31913016155e38e474a2c06d08be276cf'
+      '0xd2a4cff31913016155e38e474a2c06d08be276ce'
     )
   })
 
