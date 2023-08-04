@@ -51,6 +51,8 @@ workflows:
           filters:
             tags:
               only: /.*/
+            branches:
+              only: /.*/
       - deploy:
           context: npm_prod
           requires:
