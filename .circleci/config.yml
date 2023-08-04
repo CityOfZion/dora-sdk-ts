@@ -3,7 +3,7 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/dora-sdk-ts
   docker:
-    - image: circleci/node:14.16.0
+    - image: cimg/node:14.21.3
 
 jobs:
   test:
