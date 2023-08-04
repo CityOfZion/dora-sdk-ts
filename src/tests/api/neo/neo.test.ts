@@ -40,6 +40,7 @@ describe('neo sdk', () => {
       res.hash,
       '0x9d3276785e7306daf59a3f3b9e31912c095598bbfb8a4476b821b0e59be4c57a'
     )
+    assert.isNotNull(res.witnesses)
     assert.strictEqual(res.size, 114)
   })
 
