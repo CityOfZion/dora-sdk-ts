@@ -1,6 +1,6 @@
 {
   "name": "@cityofzion/dora-ts",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index",
   "types": "dist/index",
