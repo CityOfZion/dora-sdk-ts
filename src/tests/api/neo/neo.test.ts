@@ -1,7 +1,6 @@
 import { assert } from 'chai'
 import { NeoRest } from '../../../api/neo'
 
-
 describe('neo sdk', () => {
   it('should get an asset', async () => {
     const res = await NeoRest.asset(
@@ -178,7 +177,7 @@ describe('neo sdk', () => {
     const res = await NeoRest.addressTXFull(
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       1,
-        'testnet'
+      'testnet'
     )
     assert.isNotNull(res)
     assert.isObject(res)

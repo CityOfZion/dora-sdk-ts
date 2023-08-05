@@ -21,8 +21,8 @@ import type {
   TransactionsResponse,
   TransferHistoryResponse
 } from '../../interfaces/api/neo_legacy'
-import type { RestConfig } from "../../interfaces";
-import {DORA_URL} from '../../constants'
+import type { RestConfig } from '../../interfaces'
+import { DORA_URL } from '../../constants'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
@@ -32,12 +32,15 @@ const DefaultLegacyRestConfig: RestConfig = {
 }
 
 export class NeoLegacyRESTApi {
-  protected axios: AxiosInstance;
-  public constructor(restConfig: RestConfig = DefaultLegacyRestConfig, axiosConfig?: AxiosRequestConfig) {
+  protected axios: AxiosInstance
+  public constructor(
+    restConfig: RestConfig = DefaultLegacyRestConfig,
+    axiosConfig?: AxiosRequestConfig
+  ) {
     if (typeof axiosConfig === 'undefined') {
-      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint };
+      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint }
     } else {
-      axiosConfig["baseURL"] = restConfig.doraUrl + restConfig.endpoint;
+      axiosConfig['baseURL'] = restConfig.doraUrl + restConfig.endpoint
     }
     this.axios = axios.create(axiosConfig)
   }
@@ -50,18 +53,12 @@ export class NeoLegacyRESTApi {
     return await this.get(network, method, address)
   }
 
-  async asset(
-    assetHash: string,
-    network = 'mainnet'
-  ): Promise<AssetResponse> {
+  async asset(assetHash: string, network = 'mainnet'): Promise<AssetResponse> {
     const method = 'asset'
     return await this.get(network, method, assetHash)
   }
 
-  async assets(
-    page: number = 1,
-    network = 'mainnet'
-  ): Promise<AssetsResponse> {
+  async assets(page: number = 1, network = 'mainnet'): Promise<AssetsResponse> {
     const method = 'assets'
     return await this.get(network, method, page)
   }
@@ -74,18 +71,12 @@ export class NeoLegacyRESTApi {
     return await this.get(network, method, address)
   }
 
-  async block(
-    blockHash: string,
-    network = 'mainnet'
-  ): Promise<BlockResponse> {
+  async block(blockHash: string, network = 'mainnet'): Promise<BlockResponse> {
     const method = 'block'
     return await this.get(network, method, blockHash)
   }
 
-  async blocks(
-    page: number = 1,
-    network = 'mainnet'
-  ): Promise<BlocksResponse> {
+  async blocks(page: number = 1, network = 'mainnet'): Promise<BlocksResponse> {
     const method = 'blocks'
     return await this.get(network, method, page)
   }
@@ -158,17 +149,12 @@ export class NeoLegacyRESTApi {
     return await this.get(network, method)
   }
 
-  async invocationStats(
-    network = 'mainnet'
-  ): Promise<InvocationStatsResponse> {
+  async invocationStats(network = 'mainnet'): Promise<InvocationStatsResponse> {
     const method = 'invocation_stats'
     return await this.get(network, method)
   }
 
-  async log(
-    contractHash: string,
-    network = 'mainnet'
-  ): Promise<LogResponse> {
+  async log(contractHash: string, network = 'mainnet'): Promise<LogResponse> {
     const method = 'log'
     return await this.get(network, method, contractHash)
   }
