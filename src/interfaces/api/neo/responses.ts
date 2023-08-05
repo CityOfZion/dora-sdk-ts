@@ -123,3 +123,7 @@ export interface VoterResponse {
   candidatePubbkey: string
   balance: number
 }
+
+export interface ContractStatsResponse {
+  [date: string]: number
+}
