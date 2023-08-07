@@ -2,9 +2,9 @@ import { TypedResponse, Witness } from '../common'
 
 export interface ApplicationLog {
   gas_consumed: string
-  logs: unknown[]
+  logs: any[]
   notifications: Notification[]
-  stack: unknown[]
+  stack: any[]
   time: string
   trigger: string
   txid: string
@@ -41,7 +41,7 @@ export interface ContractState {
   author: string
   email: string
   description: string
-  properties: unknown
+  properties: any
 }
 
 export interface ContractStorage {
@@ -92,7 +92,7 @@ export interface TimedBalance {
 
 export interface Transaction {
   _id?: string
-  attributes?: unknown[]
+  attributes?: any[]
   block: number
   gas?: string
   jsonsize?: number
