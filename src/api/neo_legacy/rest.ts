@@ -100,6 +100,7 @@ export class NeoLegacyRESTApi {
   async contractStats(
     contractHash: string,
     network = 'mainnet'
+    // eslint-disable-next-line @typescript-eslint/ban-types
   ): Promise<Object> {
     const method = 'contract_stats'
     return await this.get(network, method)
@@ -200,6 +201,7 @@ export class NeoLegacyRESTApi {
     return await this.get(network, method, address, page)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async get(...args: any[]) {
     const endpoint = args.join('/')
     const { data } = await this.axios.get(`/${endpoint}`)

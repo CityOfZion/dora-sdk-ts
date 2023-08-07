@@ -1,5 +1,6 @@
 import { assert } from 'chai'
 import { NeoRest } from '../../../api/neo'
+import type { ContractStatsResponse } from 'src/interfaces/api/neo'
 
 describe('neo sdk', () => {
   it('should get an asset', async () => {
@@ -83,7 +84,7 @@ describe('neo sdk', () => {
     const res = (await NeoRest.contractStats(
       '0x4625b78c56b7e43e1e6fb4ed0200e9a0a9152c92',
       'testnet'
-    )) as any
+    )) as ContractStatsResponse
     assert.isNotNull(res)
     // validated that this was still a typeof Object TS is weird about bracket notation so had to typescript above
     assert.isObject(res)
