@@ -2,11 +2,13 @@ import type {
   AddressTransactionsResponse,
   AddressTXFullResponse,
   AssetResponse,
+  AssetsResponse,
   BalanceResponse,
   BlockResponse,
   BlocksResponse,
   ContractResponse,
   ContractsResponse,
+  ContractStatsResponse,
   GetAllNodesResponse,
   HeightResponse,
   InvocationStatsResponse,
@@ -16,8 +18,8 @@ import type {
   TransferHistoryResponse,
   VoterResponse
 } from '../../interfaces/api/neo'
-import type { RestConfig } from "../../interfaces";
-import {DORA_URL} from '../../constants'
+import type { RestConfig } from '../../interfaces'
+import { DORA_URL } from '../../constants'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
@@ -27,12 +29,15 @@ const DefaultRestConfig: RestConfig = {
 }
 
 export class NeoRESTApi {
-  protected axios: AxiosInstance;
-  public constructor(restConfig: RestConfig = DefaultRestConfig, axiosConfig?: AxiosRequestConfig) {
+  protected axios: AxiosInstance
+  public constructor(
+    restConfig: RestConfig = DefaultRestConfig,
+    axiosConfig?: AxiosRequestConfig
+  ) {
     if (typeof axiosConfig === 'undefined') {
-      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint };
+      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint }
     } else {
-      axiosConfig["baseURL"] = restConfig.doraUrl + restConfig.endpoint;
+      axiosConfig['baseURL'] = restConfig.doraUrl + restConfig.endpoint
     }
     this.axios = axios.create(axiosConfig)
   }
@@ -55,15 +60,12 @@ export class NeoRESTApi {
     return await this.get(network, method, address, page)
   }
 
-  async asset(
-    assetHash: string,
-    network = 'mainnet'
-  ): Promise<AssetResponse> {
+  async asset(assetHash: string, network = 'mainnet'): Promise<AssetResponse> {
     const method = 'asset'
     return await this.get(network, method, assetHash)
   }
 
-  async assets(page: number = 1, network = 'mainnet'): Promise<any> {
+  async assets(page: number = 1, network = 'mainnet'): Promise<AssetsResponse> {
     const method = 'assets'
     return await this.get(network, method, page)
   }
@@ -84,10 +86,7 @@ export class NeoRESTApi {
     return await this.get(network, method, blockHeight)
   }
 
-  async blocks(
-    page: number = 1,
-    network = 'mainnet'
-  ): Promise<BlocksResponse> {
+  async blocks(page: number = 1, network = 'mainnet'): Promise<BlocksResponse> {
     const method = 'blocks'
     return await this.get(network, method, page)
   }
@@ -116,7 +115,7 @@ export class NeoRESTApi {
   async contractStats(
     contractHash: string,
     network = 'mainnet'
-  ): Promise<Object> {
+  ): Promise<ContractStatsResponse> {
     const method = 'contract_stats'
     return await this.get(network, method, contractHash)
   }
@@ -131,9 +130,7 @@ export class NeoRESTApi {
     return await this.get(network, method)
   }
 
-  async invocationStats(
-    network = 'mainnet'
-  ): Promise<InvocationStatsResponse> {
+  async invocationStats(network = 'mainnet'): Promise<InvocationStatsResponse> {
     const method = 'invocation_stats'
     return await this.get(network, method)
   }
@@ -168,15 +165,12 @@ export class NeoRESTApi {
     return await this.get(network, method, address, page)
   }
 
-  async voter(
-    address: string,
-    network = 'mainnet'
-  ): Promise<VoterResponse> {
+  async voter(address: string, network = 'mainnet'): Promise<VoterResponse> {
     const method = 'voter'
     return await this.get(network, method, address)
   }
 
-  private async get(...args: any[]) {
+  private async get(...args: unknown[]) {
     const endpoint = args.join('/')
     const { data } = await this.axios.get(`/${endpoint}`)
     return data
