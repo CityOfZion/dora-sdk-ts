@@ -18,6 +18,6 @@
 
 ## Quickstart:
 
-* To build: `npm run build`
-* To test: `npm run test`
-* To format `npm run fmt`
+1. Install dependencies: `npm install`
+2. Build Dora: `npm run build`
+3. Run tests: `npm run test`
