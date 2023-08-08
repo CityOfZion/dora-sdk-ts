@@ -19,5 +19,5 @@
 ## Quickstart:
 
 1. Install dependencies: `npm install`
-2. Build Dora: `npm run build`
+2. Build SDK: `npm run build`
 3. Run tests: `npm run test`
