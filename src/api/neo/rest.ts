@@ -25,7 +25,7 @@ import axios from 'axios'
 
 const DefaultRestConfig: RestConfig = {
   doraUrl: DORA_URL,
-  endpoint: '/api/v1/neo3'
+  endpoint: '/api/v2/neo3'
 }
 
 export class NeoRESTApi {
