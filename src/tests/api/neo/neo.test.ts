@@ -185,4 +185,16 @@ describe('neo sdk', () => {
     assert.isArray(res.items)
     assert.isAtLeast(res.items.length, 2)
   })
+
+  it('should get the token provenance', async () => {
+    const res = await NeoRest.tokenProvenance('0x904deb56fdd9a87b48d89e0cc0ac3415f9207840', '31')
+    const stub = res[0]
+    console.log(stub)
+    assert.equal(JSON.stringify(stub),   JSON.stringify({
+      blockheight: 3344359,
+      timestamp: 1682461762,
+      txid: '0xece84f5ddd3787915a8c113f5f8748be5fc2dff560b202304264de42fb2b83ca',
+      owner: 'NaZwraSdJv9BYwYzZryiZcydaPDof56beK'
+    }))
+  })
 })

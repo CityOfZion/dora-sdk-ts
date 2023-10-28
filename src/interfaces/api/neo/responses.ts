@@ -14,7 +14,8 @@ import {
   NEF,
   Token,
   Transaction,
-  TransactionEnhanced
+  TransactionEnhanced,
+  Provenance
 } from './interface'
 
 export interface AddressTransactionsResponse {
@@ -104,6 +105,9 @@ export interface LogResponse {
   txid: string
   vmstate: string
 }
+
+export type TokenProvenanceResponse = Provenance[]
+
 
 export type TransactionResponse = Transaction
 

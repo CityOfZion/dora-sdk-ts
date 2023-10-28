@@ -13,6 +13,7 @@ import type {
   HeightResponse,
   InvocationStatsResponse,
   LogResponse,
+  TokenProvenanceResponse,
   TransactionResponse,
   TransactionsResponse,
   TransferHistoryResponse,
@@ -138,6 +139,15 @@ export class NeoRESTApi {
   async log(txid: string, network = 'mainnet'): Promise<LogResponse> {
     const method = 'log'
     return await this.get(network, method, txid)
+  }
+
+  async tokenProvenance(
+      contract: string,
+      tokenId : string,
+      network = 'mainnet'
+  ): Promise<TokenProvenanceResponse> {
+    const method = 'nfi'
+    return await this.get(network, method, contract, tokenId)
   }
 
   async transaction(

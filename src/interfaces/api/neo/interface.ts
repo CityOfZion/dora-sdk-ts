@@ -136,6 +136,13 @@ export interface Permission {
   methods: string[]
 }
 
+export interface Provenance {
+  blockheight: number
+  timestamp: number
+  txid: string
+  owner: string
+}
+
 export interface Signer {
   account: string
   scopes: string
