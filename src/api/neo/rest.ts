@@ -149,7 +149,7 @@ export class NeoRESTApi {
       tokenId : string,
       network = 'mainnet'
   ): Promise<TokenProvenanceResponse> {
-    const method = 'nfi'
+    const method = 'token_provenance'
     return await this.get(network, method, contract, tokenId)
   }
 
