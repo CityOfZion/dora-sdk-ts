@@ -138,18 +138,6 @@ describe('neo sdk', () => {
     assert.strictEqual(res.items.length, 15)
   })
 
-  // TODO: broken on API v1 side, v2 not yet implemented. Skip for now
-  // it('should get the enhanced transactions for an address', async () => {
-  //   const res = await NeoRest.addressTransactions(
-  //     'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
-  //     1
-  //   )
-  //   assert.isNotNull(res)
-  //   assert.isObject(res)
-  //   assert.isArray(res.items)
-  //   assert.isAtLeast(res.items.length, 14)
-  // })
-
   it('should get transfer history', async () => {
     const res = await NeoRest.transferHistory(
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
@@ -175,7 +163,7 @@ describe('neo sdk', () => {
   })
 
   it('should get the full transactions history for an address', async () => {
-    const res = await NeoRest.addressTXFull(
+    const res = await NeoRest.addressTransactions(
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       1,
       'testnet'
