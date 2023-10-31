@@ -48,7 +48,7 @@ export class NeoRESTApi {
   }
 
   /**
-   * @deprecated use addressTransactions instead.
+   * @deprecated use addressTransactions instead
    */
   async addressTXFull(
     address: string,
