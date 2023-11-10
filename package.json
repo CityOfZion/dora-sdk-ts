@@ -1,6 +1,6 @@
 {
   "name": "@cityofzion/dora-ts",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A typescript sdk for the dora blockchain data aggregator by COZ.",
   "license": "Apache-2.0",
   "main": "dist/index",
