@@ -1,2 +1,2 @@
-export * from './neo'
-export * from './neo_legacy'
+export * from './neoN3'
+export * from './neoLegacy'

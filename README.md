@@ -18,6 +18,12 @@
 
 ## Quickstart:
 
-1. Install dependencies: `npm install`
+### Initial test and execution
+1. Install dependencies: `npm install @cityofzion/dora-ts`
 2. Build SDK: `npm run build`
 3. Run tests: `npm run test`
+
+
+### General Use
+For workflows and sdk usage, refer to the [tests](./src/tests) directory.
+

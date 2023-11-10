@@ -74,6 +74,36 @@ export class NeoRESTApi {
     return await this.get(network, method, page)
   }
 
+
+  /**
+   * Gets the balance of an address. Balances are considerate of the balances properties of the tokens.
+   * @param address The requested address. This field should begin with 'N' for Neo N3.
+   * @param network The target network ('mainnet', 'testnet')
+   *
+   * @example
+   * //Get the balance of a testnet address
+   * const res = await NeoN3REST.balance(
+   *   'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
+   *   'testnet'
+   * )
+   * console.log(res)
+   * ->
+   * [
+   *   {
+   *     asset: '0xd2a4cff31913016155e38e474a2c06d08be276cf',
+   *     asset_name: 'GasToken',
+   *     symbol: 'GAS',
+   *     balance: 20000
+   *   },
+   *   {
+   *     asset: '0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5',
+   *     asset_name: 'NeoToken',
+   *     symbol: 'NEO',
+   *     balance: 10000
+   *   }
+   * ]
+   *
+   */
   async balance(
     address: string,
     network = 'mainnet'
@@ -190,4 +220,4 @@ export class NeoRESTApi {
   }
 }
 
-export const NeoRest = new NeoRESTApi()
+export const NeoN3REST = new NeoRESTApi()

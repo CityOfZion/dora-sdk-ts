@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { NeoLegacyREST } from '../../../api/neo_legacy'
+import { NeoLegacyREST } from '../../../api/neoLegacy'
 
 describe('neo legacy', () => {
   // timeout

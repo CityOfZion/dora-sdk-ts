@@ -1,10 +1,10 @@
 import { assert } from 'chai'
-import { NeoRest } from '../../../api/neo'
+import { NeoN3REST } from '../../../api/neoN3'
 import type { ContractStatsResponse } from 'src/interfaces/api/neo'
 
 describe('neo sdk', () => {
   it('should get an asset', async () => {
-    const res = await NeoRest.asset(
+    const res = await NeoN3REST.asset(
       '0xd2a4cff31913016155e38e474a2c06d08be276cf',
       'testnet'
     )
@@ -17,23 +17,24 @@ describe('neo sdk', () => {
   })
 
   it('should get assets', async () => {
-    const res = await NeoRest.assets(2, 'testnet')
+    const res = await NeoN3REST.assets(2, 'testnet')
     assert.isNotNull(res)
     assert.strictEqual(res.items.length, 15)
   })
 
   it('should get a balance', async () => {
-    const res = await NeoRest.balance(
+    const res = await NeoN3REST.balance(
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       'testnet'
     )
+    console.log(res)
     assert.isNotNull(res)
     // 2 because of NEO and GAS
     assert.isAtLeast(res.length, 2)
   })
 
   it('should get a block', async () => {
-    const res = await NeoRest.block(0, 'testnet')
+    const res = await NeoN3REST.block(0, 'testnet')
     assert.isNotNull(res)
     assert.isObject(res)
     assert.strictEqual(
@@ -45,7 +46,7 @@ describe('neo sdk', () => {
   })
 
   it('should get a block with transactions', async () => {
-    const res = await NeoRest.block(2486, 'testnet')
+    const res = await NeoN3REST.block(2486, 'testnet')
     assert.isNotNull(res)
     assert.isObject(res)
     assert.strictEqual(
@@ -56,14 +57,14 @@ describe('neo sdk', () => {
   })
 
   it('should get blocks', async () => {
-    const res = await NeoRest.blocks(1, 'testnet')
+    const res = await NeoN3REST.blocks(1, 'testnet')
     assert.isNotNull(res)
     assert.isArray(res.items)
     assert.strictEqual(res.items.length, 15)
   })
 
   it('should get a contract', async () => {
-    const res = await NeoRest.contract(
+    const res = await NeoN3REST.contract(
       '0x4625b78c56b7e43e1e6fb4ed0200e9a0a9152c92',
       'testnet'
     )
@@ -75,13 +76,13 @@ describe('neo sdk', () => {
   })
 
   it('should get contracts', async () => {
-    const res = await NeoRest.contracts(1, 'testnet')
+    const res = await NeoN3REST.contracts(1, 'testnet')
     assert.isNotNull(res)
     assert.isObject(res)
   })
 
   it('should get contract stats', async () => {
-    const res = (await NeoRest.contractStats(
+    const res = (await NeoN3REST.contractStats(
       '0x4625b78c56b7e43e1e6fb4ed0200e9a0a9152c92',
       'testnet'
     )) as ContractStatsResponse
@@ -91,18 +92,18 @@ describe('neo sdk', () => {
   })
 
   it('should get nodes', async () => {
-    const res = await NeoRest.getAllNodes('testnet')
+    const res = await NeoN3REST.getAllNodes('testnet')
     assert.isNotNull(res)
   })
 
   it('should get the block height', async () => {
-    const res = await NeoRest.height('testnet')
+    const res = await NeoN3REST.height('testnet')
     assert.isNotNull(res)
     assert.isObject(res)
   })
 
   it('should get the transaction log', async () => {
-    const res = await NeoRest.log(
+    const res = await NeoN3REST.log(
       '0x7f40e2252fe791b89d60c2cdd9419de7984e5fab6d941d3cf3a8d0c96135c535',
       'testnet'
     )
@@ -116,7 +117,7 @@ describe('neo sdk', () => {
   })
 
   it('should get a transaction', async () => {
-    const res = await NeoRest.transaction(
+    const res = await NeoN3REST.transaction(
       '0x7f40e2252fe791b89d60c2cdd9419de7984e5fab6d941d3cf3a8d0c96135c535',
       'testnet'
     )
@@ -131,7 +132,7 @@ describe('neo sdk', () => {
   })
 
   it('should get transactions', async () => {
-    const res = await NeoRest.transactions(1, 'testnet')
+    const res = await NeoN3REST.transactions(1, 'testnet')
     assert.isNotNull(res)
     assert.isObject(res)
     assert.isArray(res.items)
@@ -139,7 +140,7 @@ describe('neo sdk', () => {
   })
 
   it('should get transfer history', async () => {
-    const res = await NeoRest.transferHistory(
+    const res = await NeoN3REST.transferHistory(
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       1,
       'testnet'
@@ -151,19 +152,19 @@ describe('neo sdk', () => {
   })
 
   it('should get the voter information of a user', async () => {
-    const res = await NeoRest.voter('Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D')
+    const res = await NeoN3REST.voter('Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D')
     assert.isNotNull(res)
     assert.isObject(res)
   })
 
   it('should get Neo committee information', async () => {
-    const res = await NeoRest.committee()
+    const res = await NeoN3REST.committee()
     assert.isNotNull(res)
     assert.isArray(res)
   })
 
   it('should get the full transactions history for an address', async () => {
-    const res = await NeoRest.addressTransactions(
+    const res = await NeoN3REST.addressTransactions(
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       1,
       'testnet'
@@ -175,9 +176,8 @@ describe('neo sdk', () => {
   })
 
   it('should get the token provenance', async () => {
-    const res = await NeoRest.tokenProvenance('0x904deb56fdd9a87b48d89e0cc0ac3415f9207840', '31')
-    const stub = res[0]
-    assert.equal(JSON.stringify(stub),   JSON.stringify({
+    const res = await NeoN3REST.tokenProvenance('0x904deb56fdd9a87b48d89e0cc0ac3415f9207840', '31')
+    assert.equal(JSON.stringify(res[0]),   JSON.stringify({
       blockheight: 3344359,
       timestamp: 1682461762,
       txid: '0xece84f5ddd3787915a8c113f5f8748be5fc2dff560b202304264de42fb2b83ca',

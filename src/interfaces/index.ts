@@ -1,3 +1,3 @@
 //export * from "./common"
-export * from './api'
+export * as api from './api'
 export * from './rest'

@@ -1,2 +1,2 @@
 export * as api from './api'
-export * from './interfaces'
+export * as interfaces from './interfaces'
