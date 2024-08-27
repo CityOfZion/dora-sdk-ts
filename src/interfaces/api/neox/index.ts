@@ -1,14 +1,14 @@
 export interface Address {
-  creator_address_hash: string | null
-  creation_tx_hash: string | null
-  token: Token | null
+  creator_address_hash?: string
+  creation_tx_hash?: string
+  token?: Token
   coin_balance: string
-  exchange_rate: string | null
-  implementation_address: string | null
+  exchange_rate?: string
+  implementation_address?: string
   block_number_balance_updated_at: number
   hash: string
-  implementation_name: string | null
-  name: string | null
+  implementation_name?: string
+  name?: string
   is_contract: boolean
   private_tags: AddressTag[]
   watchlist_names: WatchlistName[]
@@ -37,7 +37,7 @@ export interface AddressTag {
 export interface Token {
   address: string
   circulating_market_cap: string
-  icon_url: string | null
+  icon_url?: string
   name: string
   decimals: string
   symbol: string
