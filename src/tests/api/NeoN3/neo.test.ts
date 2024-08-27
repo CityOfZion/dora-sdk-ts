@@ -176,12 +176,18 @@ describe('neo sdk', () => {
   })
 
   it('should get the token provenance', async () => {
-    const res = await NeoN3REST.tokenProvenance('0x904deb56fdd9a87b48d89e0cc0ac3415f9207840', '31')
-    assert.equal(JSON.stringify(res[0]),   JSON.stringify({
-      blockheight: 3344359,
-      timestamp: 1682461762,
-      txid: '0xece84f5ddd3787915a8c113f5f8748be5fc2dff560b202304264de42fb2b83ca',
-      owner: 'NaZwraSdJv9BYwYzZryiZcydaPDof56beK'
-    }))
+    const res = await NeoN3REST.tokenProvenance(
+      '0x904deb56fdd9a87b48d89e0cc0ac3415f9207840',
+      '31'
+    )
+    assert.equal(
+      JSON.stringify(res[0]),
+      JSON.stringify({
+        blockheight: 3347807,
+        timestamp: 1682517332,
+        txid: '0xdc78f791dddaca469772f49a21431c85b53eb9bea5d3ac02a12aaa8e40c1ba7d',
+        owner: 'NY8cnjo4F3sNw5cxMCwwHBsi8FqHvnJBXC'
+      })
+    )
   })
 })
