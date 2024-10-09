@@ -116,7 +116,7 @@ export interface TokenTransfer {
   timestamp: string
   to: AddressParam
   token: Token
-  total: TotalERC1155 | TotalERC20 | TotalERC721
+  total: TotalERC1155 | TotalERC1155Batch | TotalERC20 | TotalERC721
   tx_hash: string
   type: string
 }
@@ -125,6 +125,8 @@ export interface TotalERC1155 {
   decimals: string
   value: string
 }
+
+export type TotalERC1155Batch = TotalERC1155[]
 
 export interface TotalERC20 {
   decimals: string
