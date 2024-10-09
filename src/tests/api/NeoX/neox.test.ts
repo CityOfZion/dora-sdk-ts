@@ -17,4 +17,30 @@ describe('neox sdk', () => {
     assert.property(res, 'public_tags')
     assert.property(res, 'watchlist_names')
   })
+
+  it('should get block information', async () => {
+    const blockNumber = '456865'
+    const res = await NeoXREST.getBlock(blockNumber)
+
+    assert.isNotNull(res)
+    assert.strictEqual(res.height, Number(blockNumber))
+    assert.isString(res.hash)
+    assert.isString(res.difficulty)
+    assert.strictEqual(
+      res.parent_hash,
+      '0x1eb1b5275ef0cd066eb509a5db5bf5313cb86a7b55f06e062363dfeb27be66d3'
+    )
+  })
+
+  it('should get transaction information', async () => {
+    const hash =
+      '0xbf1b8a0973bddf3621781c57cf02e5d069b622601b3f2a7238f602943f2f7578'
+    const res = await NeoXREST.getTransaction(hash)
+
+    assert.isNotNull(res)
+    assert.strictEqual(res.hash, hash)
+    assert.strictEqual(res.block, 456865)
+    assert.strictEqual(res.timestamp, '2024-10-04T14:21:38.000000Z')
+    assert.strictEqual(res.method, 'removeLiquidityETH')
+  })
 })

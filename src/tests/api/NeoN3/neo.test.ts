@@ -27,10 +27,9 @@ describe('neo sdk', () => {
       'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
       'testnet'
     )
-    console.log(res)
+
     assert.isNotNull(res)
-    // 2 because of NEO and GAS
-    assert.isAtLeast(res.length, 2)
+    assert.isAtLeast(res.length, 2) // 2 because of NEO and GAS.
   })
 
   it('should get a block', async () => {

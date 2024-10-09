@@ -2,7 +2,7 @@ import type { RestConfig } from '../../interfaces'
 import { DORA_URL } from '../../constants'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
-import type { Address } from '../../interfaces/api/neox'
+import type { Address, Block, Transaction } from '../../interfaces/api/neox'
 
 const DefaultNeoXRestConfig: RestConfig = {
   doraUrl: DORA_URL,
@@ -26,6 +26,20 @@ export class NeoXRESTApi {
 
   async getAddress(addressHash: string, network = 'mainnet'): Promise<Address> {
     return await this.get(network, 'addresses', addressHash)
+  }
+
+  async getBlock(
+    blockNumberOrHash: string,
+    network = 'mainnet'
+  ): Promise<Block> {
+    return await this.get(network, 'blocks', blockNumberOrHash)
+  }
+
+  async getTransaction(
+    transactionHash: string,
+    network = 'mainnet'
+  ): Promise<Transaction> {
+    return await this.get(network, 'transactions', transactionHash)
   }
 
   private async get(...args: unknown[]) {
