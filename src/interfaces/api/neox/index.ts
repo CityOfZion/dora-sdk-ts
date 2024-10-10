@@ -73,6 +73,10 @@ export interface Block {
   withdrawals_count: number
 }
 
+export interface Blocks {
+  items: Block[]
+}
+
 export interface DecodedInput {
   method_call: string
   method_id: string

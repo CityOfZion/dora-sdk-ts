@@ -32,6 +32,17 @@ describe('neox sdk', () => {
     )
   })
 
+  it('should get blocks information', async () => {
+    const res = await NeoXREST.getBlocks()
+
+    assert.isNotNull(res)
+    assert.isArray(res.items)
+    assert.isNotEmpty(res.items)
+    assert.isString(res.items[0].hash)
+    assert.isNumber(res.items[0].height)
+    assert.isString(res.items[0].difficulty)
+  })
+
   it('should get stats information', async () => {
     const res = await NeoXREST.getStats()
 

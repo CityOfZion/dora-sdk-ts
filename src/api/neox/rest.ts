@@ -5,6 +5,7 @@ import axios from 'axios'
 import type {
   Address,
   Block,
+  Blocks,
   Stats,
   Transaction
 } from '../../interfaces/api/neox'
@@ -38,6 +39,10 @@ export class NeoXRESTApi {
     network = 'mainnet'
   ): Promise<Block> {
     return await this.get(network, 'blocks', blockNumberOrHash)
+  }
+
+  async getBlocks(network = 'mainnet'): Promise<Blocks> {
+    return await this.get(network, 'blocks')
   }
 
   async getStats(network = 'mainnet'): Promise<Stats> {
