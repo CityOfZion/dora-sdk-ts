@@ -112,6 +112,10 @@ export interface Token {
   icon_url?: string
 }
 
+export interface Tokens {
+  items: Token[]
+}
+
 export interface TokenTransfer {
   block_hash: string
   from: AddressParam

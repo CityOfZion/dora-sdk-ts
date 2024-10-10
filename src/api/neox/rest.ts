@@ -49,6 +49,10 @@ export class NeoXRESTApi {
     return await this.get(network, 'stats')
   }
 
+  async getTokens(network = 'mainnet') {
+    return await this.get(network, 'tokens')
+  }
+
   async getTransaction(
     transactionHash: string,
     network = 'mainnet'

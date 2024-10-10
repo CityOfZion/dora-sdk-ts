@@ -54,6 +54,18 @@ describe('neox sdk', () => {
     assert.isAbove(res.average_block_time, 0)
   })
 
+  it('should get tokens information', async () => {
+    const res = await NeoXREST.getTokens()
+
+    assert.isNotNull(res)
+    assert.isArray(res.items)
+    assert.isNotEmpty(res.items)
+    assert.isString(res.items[0].address)
+    assert.isString(res.items[0].name)
+    assert.isString(res.items[0].symbol)
+    assert.isString(res.items[0].decimals)
+  })
+
   it('should get transaction information', async () => {
     const hash =
       '0xbf1b8a0973bddf3621781c57cf02e5d069b622601b3f2a7238f602943f2f7578'
