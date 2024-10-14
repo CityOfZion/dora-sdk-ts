@@ -73,6 +73,10 @@ export interface Block {
   withdrawals_count: number
 }
 
+export interface Blocks {
+  items: Block[]
+}
+
 export interface DecodedInput {
   method_call: string
   method_id: string
@@ -106,6 +110,10 @@ export interface Token {
   total_supply: string
   circulating_market_cap?: string
   icon_url?: string
+}
+
+export interface Tokens {
+  items: Token[]
 }
 
 export interface TokenTransfer {
@@ -176,4 +184,23 @@ export interface Transaction {
 export interface WatchlistName {
   display_name: string
   label: string
+}
+
+export interface Stats {
+  total_blocks: string
+  total_addresses: string
+  total_transactions: string
+  average_block_time: number
+  coin_price: string
+  total_gas_used: string
+  transactions_today: string
+  gas_used_today: string
+  gas_prices: {
+    average: number
+    fast: number
+    slow: number
+  }
+  static_gas_price: string
+  market_cap: string
+  network_utilization_percentage: number
 }

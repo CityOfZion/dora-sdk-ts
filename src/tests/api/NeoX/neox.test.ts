@@ -32,6 +32,40 @@ describe('neox sdk', () => {
     )
   })
 
+  it('should get blocks information', async () => {
+    const res = await NeoXREST.getBlocks()
+
+    assert.isNotNull(res)
+    assert.isArray(res.items)
+    assert.isNotEmpty(res.items)
+    assert.isString(res.items[0].hash)
+    assert.isNumber(res.items[0].height)
+    assert.isString(res.items[0].difficulty)
+  })
+
+  it('should get stats information', async () => {
+    const res = await NeoXREST.getStats()
+
+    assert.isNotNull(res)
+    assert.isString(res.total_blocks)
+    assert.isString(res.total_addresses)
+    assert.isString(res.total_transactions)
+    assert.isNumber(res.average_block_time)
+    assert.isAbove(res.average_block_time, 0)
+  })
+
+  it('should get tokens information', async () => {
+    const res = await NeoXREST.getTokens()
+
+    assert.isNotNull(res)
+    assert.isArray(res.items)
+    assert.isNotEmpty(res.items)
+    assert.isString(res.items[0].address)
+    assert.isString(res.items[0].name)
+    assert.isString(res.items[0].symbol)
+    assert.isString(res.items[0].decimals)
+  })
+
   it('should get transaction information', async () => {
     const hash =
       '0xbf1b8a0973bddf3621781c57cf02e5d069b622601b3f2a7238f602943f2f7578'
