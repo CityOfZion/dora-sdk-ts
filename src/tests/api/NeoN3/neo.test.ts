@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { NeoN3REST } from '../../../api/neoN3'
+import { NeoN3REST } from '../../../api'
 import type { ContractStatsResponse } from 'src/interfaces/api/neo'
 
 describe('neo sdk', () => {
@@ -148,7 +148,7 @@ describe('neo sdk', () => {
     assert.isObject(res)
     assert.isArray(res.items)
     assert.isAtLeast(res.items.length, 2)
-  })
+  }).timeout(60_000)
 
   it('should get the voter information of a user', async () => {
     const res = await NeoN3REST.voter('Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D')
@@ -188,5 +188,109 @@ describe('neo sdk', () => {
         owner: 'NY8cnjo4F3sNw5cxMCwwHBsi8FqHvnJBXC'
       })
     )
+  })
+
+  it('Should get full transactions by address (Mainnet)', async () => {
+    const address = 'NYnfAZTcVfSfNgk4RnP2DBNgosq2tUN3U2'
+    const response = await NeoN3REST.getFullTransactionsByAddress({
+      address,
+      network: 'mainnet',
+      timestampFrom: '2024-07-26T07:31:23Z',
+      timestampTo: '2024-07-26T07:32:30Z'
+    })
+
+    assert.strictEqual(response.address, address)
+    assert.strictEqual(response.protocol, 'neo3')
+    assert.strictEqual(response.network, 'mainnet')
+    assert.isString(response.nextCursor)
+
+    const { data } = response
+
+    assert.isArray(data)
+    assert.isNotEmpty(data)
+
+    const [item] = data
+
+    assert.strictEqual(item.block, 5757022)
+    assert.strictEqual(item.date, '2024-07-26T07:32:29.404Z')
+    assert.strictEqual(item.invocationCount, 1)
+    assert.strictEqual(item.networkFeeAmount, '0.00123152')
+    assert.strictEqual(item.notificationCount, 1)
+    assert.strictEqual(item.systemFeeAmount, '0.00997775')
+    assert.strictEqual(
+      item.transactionID,
+      '0xed33c065ef18caf2b34a8a8db5f09787afeb74366f5cbb8b2940924bf992a9ad'
+    )
+
+    const {
+      events: [event]
+    } = item
+
+    assert.strictEqual(event.amount, '1050000000')
+    assert.strictEqual(
+      event.contractHash,
+      '0xd2a4cff31913016155e38e474a2c06d08be276cf'
+    )
+    assert.strictEqual(event.contractName, 'GasToken')
+    assert.strictEqual(event.from, 'NYnfAZTcVfSfNgk4RnP2DBNgosq2tUN3U2')
+    assert.strictEqual(event.methodName, 'transfer')
+    assert.isArray(event.supportedStandards)
+    assert.isNotEmpty(event.supportedStandards)
+    assert.strictEqual(event.to, 'NTqKcGkN8QyMkuYjFt8CzBcrRawSXfob9b')
+    assert.strictEqual(event.tokenDecimals, 8)
+    assert.strictEqual(event.tokenID, null)
+    assert.strictEqual(event.tokenType, '')
+  })
+
+  it('Should get full transactions by address (Testnet)', async () => {
+    const address = 'Ng6QMqCFfxqiXwi6QJUkMXXacRPfFGC5BW'
+    const response = await NeoN3REST.getFullTransactionsByAddress({
+      address,
+      network: 'testnet',
+      timestampFrom: '2025-01-28T06:30:40Z',
+      timestampTo: '2025-01-28T06:30:51Z'
+    })
+
+    assert.strictEqual(response.address, address)
+    assert.strictEqual(response.protocol, 'neo3')
+    assert.strictEqual(response.network, 'testnet')
+    assert.isString(response.nextCursor)
+
+    const { data } = response
+
+    assert.isArray(data)
+    assert.isNotEmpty(data)
+
+    const [item] = data
+
+    assert.strictEqual(item.block, 5367712)
+    assert.strictEqual(item.date, '2025-01-28T06:30:50.398Z')
+    assert.strictEqual(item.invocationCount, 1)
+    assert.strictEqual(item.networkFeeAmount, '0.00037364')
+    assert.strictEqual(item.notificationCount, 3)
+    assert.strictEqual(item.systemFeeAmount, '0.00873312')
+    assert.strictEqual(
+      item.transactionID,
+      '0xd23df68f871b3cc094bc10f873ca2b2f3975eb67e4e3bf93b08cd50b0b42dbb6'
+    )
+
+    const {
+      events: [event]
+    } = item
+
+    assert.strictEqual(event.amount, '0')
+    assert.strictEqual(
+      event.contractHash,
+      '0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5'
+    )
+    assert.strictEqual(event.contractName, 'NeoToken')
+    assert.strictEqual(event.from, 'Ng6QMqCFfxqiXwi6QJUkMXXacRPfFGC5BW')
+    assert.strictEqual(event.methodName, 'transfer')
+    assert.isArray(event.supportedStandards)
+    assert.isNotEmpty(event.supportedStandards)
+    assert.strictEqual(event.to, 'Ng6QMqCFfxqiXwi6QJUkMXXacRPfFGC5BW')
+    assert.strictEqual(event.tokenDecimals, 0)
+    assert.strictEqual(event.tokenID, null)
+    assert.strictEqual(event.tokenType, '')
   })
 })

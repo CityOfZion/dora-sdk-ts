@@ -17,12 +17,15 @@ import type {
   TransactionResponse,
   TransactionsResponse,
   TransferHistoryResponse,
-  VoterResponse
+  VoterResponse,
+  AxiosGetFullTransactionsByAddressParams,
+  GetFullTransactionsByAddressParams
 } from '../../interfaces/api/neo'
 import type { RestConfig } from '../../interfaces'
 import { DORA_URL } from '../../constants'
-import type { AxiosInstance, AxiosRequestConfig } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
+import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 
 const DefaultRestConfig: RestConfig = {
   doraUrl: DORA_URL,
@@ -30,7 +33,10 @@ const DefaultRestConfig: RestConfig = {
 }
 
 export class NeoRESTApi {
+  private axiosDoraV2: AxiosInstance
+
   protected axios: AxiosInstance
+
   public constructor(
     restConfig: RestConfig = DefaultRestConfig,
     axiosConfig?: AxiosRequestConfig
@@ -40,7 +46,9 @@ export class NeoRESTApi {
     } else {
       axiosConfig['baseURL'] = restConfig.doraUrl + restConfig.endpoint
     }
+
     this.axios = axios.create(axiosConfig)
+    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2` })
   }
 
   async addressTransactions(
@@ -73,7 +81,6 @@ export class NeoRESTApi {
     const method = 'assets'
     return await this.get(network, method, page)
   }
-
 
   /**
    * Gets the balance of an address. Balances are considerate of the balances properties of the tokens.
@@ -175,9 +182,9 @@ export class NeoRESTApi {
   }
 
   async tokenProvenance(
-      contract: string,
-      tokenId : string,
-      network = 'mainnet'
+    contract: string,
+    tokenId: string,
+    network = 'mainnet'
   ): Promise<TokenProvenanceResponse> {
     const method = 'token_provenance'
     return await this.get(network, method, contract, tokenId)
@@ -211,6 +218,18 @@ export class NeoRESTApi {
   async voter(address: string, network = 'mainnet'): Promise<VoterResponse> {
     const method = 'voter'
     return await this.get(network, method, address)
+  }
+
+  async getFullTransactionsByAddress(
+    params: GetFullTransactionsByAddressParams
+  ): Promise<GetFullTransactionsByAddressResponse> {
+    const { data } = await this.axiosDoraV2.post<
+      GetFullTransactionsByAddressResponse,
+      AxiosResponse<GetFullTransactionsByAddressResponse>,
+      AxiosGetFullTransactionsByAddressParams
+    >('/unified/activity-history', { ...params, protocol: 'neo3' })
+
+    return data
   }
 
   private async get(...args: unknown[]) {
