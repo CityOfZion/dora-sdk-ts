@@ -1,7 +1,7 @@
 {
   "name": "@cityofzion/dora-ts",
   "version": "0.3.0",
-  "description": "A typescript sdk for the dora blockchain data aggregator by COZ.",
+  "description": "A typescript SDK for the dora blockchain data aggregator by COZ.",
   "license": "Apache-2.0",
   "main": "dist/index",
   "types": "dist/index",
@@ -24,7 +24,7 @@
     "publishDocs": "aws sy sync ./docs s3://neoscan/prod/documentation --acl public-read "
   },
   "dependencies": {
-    "axios": "^1.4.0"
+    "axios": "1.8.2"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",

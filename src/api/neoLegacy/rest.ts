@@ -19,12 +19,15 @@ import type {
   TransactionAbstractsResponse,
   TransactionResponse,
   TransactionsResponse,
-  TransferHistoryResponse
+  TransferHistoryResponse,
+  AxiosGetFullTransactionsByAddressParams,
+  GetFullTransactionsByAddressParams
 } from '../../interfaces/api/neo_legacy'
 import type { RestConfig } from '../../interfaces'
 import { DORA_URL } from '../../constants'
-import type { AxiosInstance, AxiosRequestConfig } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
+import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 
 const DefaultLegacyRestConfig: RestConfig = {
   doraUrl: DORA_URL,
@@ -32,7 +35,10 @@ const DefaultLegacyRestConfig: RestConfig = {
 }
 
 export class NeoLegacyRESTApi {
+  private axiosDoraV2: AxiosInstance
+
   protected axios: AxiosInstance
+
   public constructor(
     restConfig: RestConfig = DefaultLegacyRestConfig,
     axiosConfig?: AxiosRequestConfig
@@ -42,7 +48,9 @@ export class NeoLegacyRESTApi {
     } else {
       axiosConfig['baseURL'] = restConfig.doraUrl + restConfig.endpoint
     }
+
     this.axios = axios.create(axiosConfig)
+    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2` })
   }
 
   async addressStats(
@@ -199,6 +207,18 @@ export class NeoLegacyRESTApi {
   ): Promise<TransferHistoryResponse> {
     const method = 'transfer_history'
     return await this.get(network, method, address, page)
+  }
+
+  async getFullTransactionsByAddress(
+    params: GetFullTransactionsByAddressParams
+  ): Promise<GetFullTransactionsByAddressResponse> {
+    const { data } = await this.axiosDoraV2.post<
+      GetFullTransactionsByAddressResponse,
+      AxiosResponse<GetFullTransactionsByAddressResponse>,
+      AxiosGetFullTransactionsByAddressParams
+    >('/unified/activity-history', { ...params, protocol: 'neolegacy' })
+
+    return data
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

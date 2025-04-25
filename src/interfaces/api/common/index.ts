@@ -66,3 +66,42 @@ export interface Witness {
   invocation: string
   verification: string
 }
+
+export type CommonGetFullTransactionsByAddressParams = {
+  address: string
+  timestampFrom: string
+  timestampTo: string
+  cursor?: string
+}
+
+type FullTransactionsEvent = {
+  amount: string
+  from: string | null
+  to: string | null
+  methodName: string
+  contractName: string
+  contractHash: string
+  supportedStandards: string[] | null
+  tokenID: string | null
+  tokenDecimals: number
+  tokenType: string
+}
+
+type FullTransactionsItem = {
+  transactionID: string
+  block: number
+  date: string
+  invocationCount: number
+  notificationCount: number
+  networkFeeAmount: string
+  systemFeeAmount: string
+  events: FullTransactionsEvent[]
+}
+
+export type GetFullTransactionsByAddressResponse = {
+  address: string
+  protocol: string
+  network: string
+  nextCursor: string
+  data: FullTransactionsItem[]
+}

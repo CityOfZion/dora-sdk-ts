@@ -1,4 +1,8 @@
-import { TypedResponse, Witness } from '../common'
+import {
+  CommonGetFullTransactionsByAddressParams,
+  TypedResponse,
+  Witness
+} from '../common'
 
 export interface ABI {
   events: Event[]
@@ -198,3 +202,11 @@ export interface Transfer {
   txid: string
   transferindex: string
 }
+
+export type GetFullTransactionsByAddressParams = {
+  network: 'mainnet' | 'testnet'
+} & CommonGetFullTransactionsByAddressParams
+
+export type AxiosGetFullTransactionsByAddressParams = {
+  protocol: 'neo3'
+} & GetFullTransactionsByAddressParams

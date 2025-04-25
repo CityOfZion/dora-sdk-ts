@@ -1,14 +1,17 @@
 import type { RestConfig } from '../../interfaces'
 import { DORA_URL } from '../../constants'
-import type { AxiosInstance, AxiosRequestConfig } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import type {
   Address,
   Block,
   Blocks,
   Stats,
-  Transaction
+  Transaction,
+  AxiosGetFullTransactionsByAddressParams,
+  GetFullTransactionsByAddressParams
 } from '../../interfaces/api/neox'
+import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 
 const DefaultNeoXRestConfig: RestConfig = {
   doraUrl: DORA_URL,
@@ -16,7 +19,10 @@ const DefaultNeoXRestConfig: RestConfig = {
 }
 
 export class NeoXRESTApi {
+  private axiosDoraV2: AxiosInstance
+
   protected axios: AxiosInstance
+
   public constructor(
     restConfig: RestConfig = DefaultNeoXRestConfig,
     axiosConfig?: AxiosRequestConfig
@@ -28,6 +34,7 @@ export class NeoXRESTApi {
     }
 
     this.axios = axios.create(axiosConfig)
+    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2` })
   }
 
   async getAddress(addressHash: string, network = 'mainnet'): Promise<Address> {
@@ -58,6 +65,18 @@ export class NeoXRESTApi {
     network = 'mainnet'
   ): Promise<Transaction> {
     return await this.get(network, 'transactions', transactionHash)
+  }
+
+  async getFullTransactionsByAddress(
+    params: GetFullTransactionsByAddressParams
+  ): Promise<GetFullTransactionsByAddressResponse> {
+    const { data } = await this.axiosDoraV2.post<
+      GetFullTransactionsByAddressResponse,
+      AxiosResponse<GetFullTransactionsByAddressResponse>,
+      AxiosGetFullTransactionsByAddressParams
+    >('/unified/activity-history', { ...params, protocol: 'neox' })
+
+    return data
   }
 
   private async get(...args: unknown[]) {

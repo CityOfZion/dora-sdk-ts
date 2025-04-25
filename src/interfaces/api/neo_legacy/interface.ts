@@ -1,4 +1,8 @@
-import { TypedResponse, Witness } from '../common'
+import {
+  CommonGetFullTransactionsByAddressParams,
+  TypedResponse,
+  Witness
+} from '../common'
 
 export interface ApplicationLog {
   gas_consumed: string
@@ -108,3 +112,11 @@ export interface Transaction {
   vin?: []
   vout?: []
 }
+
+export type GetFullTransactionsByAddressParams = {
+  network: 'mainnet'
+} & CommonGetFullTransactionsByAddressParams
+
+export type AxiosGetFullTransactionsByAddressParams = {
+  protocol: 'neolegacy'
+} & GetFullTransactionsByAddressParams
