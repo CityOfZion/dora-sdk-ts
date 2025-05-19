@@ -227,7 +227,11 @@ export class NeoRESTApi {
       GetFullTransactionsByAddressResponse,
       AxiosResponse<GetFullTransactionsByAddressResponse>,
       AxiosGetFullTransactionsByAddressParams
-    >('/unified/activity-history', { ...params, protocol: 'neo3' })
+    >('/unified/activity-history', {
+      pageLimit: 50,
+      ...params,
+      protocol: 'neo3'
+    })
 
     return data
   }

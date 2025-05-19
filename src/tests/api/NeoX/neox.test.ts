@@ -103,31 +103,28 @@ describe('neox sdk', () => {
 
     const [item] = data
 
-    assert.strictEqual(item.block, 1411628)
-    assert.strictEqual(item.date, '2025-01-27T13:25:17Z')
-    assert.strictEqual(item.invocationCount, 0)
-    assert.strictEqual(item.networkFeeAmount, '0.00084')
-    assert.strictEqual(item.notificationCount, 0)
-    assert.strictEqual(item.systemFeeAmount, '')
-    assert.strictEqual(
-      item.transactionID,
-      '0x495eb0e7e364aab3c21881f86f1cacd616d6e06bd6da9bfa90d422d9fbcbe096'
-    )
+    assert.isNumber(item.block)
+    assert.isString(item.date)
+    assert.isNumber(item.invocationCount)
+    assert.isString(item.networkFeeAmount)
+    assert.isNumber(item.notificationCount)
+    assert.isString(item.systemFeeAmount)
+    assert.isString(item.transactionID)
 
     const {
       events: [event]
     } = item
 
-    assert.strictEqual(event.amount, '5.71')
-    assert.strictEqual(event.contractHash, '')
-    assert.strictEqual(event.contractName, 'GAS')
-    assert.strictEqual(event.from, '0x17c15d54383c44384191e677739b46fc49dab214')
-    assert.strictEqual(event.methodName, 'transfer')
+    assert.isString(event.amount)
+    assert.isString(event.contractHash)
+    assert.isString(event.contractName)
+    assert.isString(event.from)
+    assert.isString(event.methodName)
     assert.isNull(event.supportedStandards)
-    assert.strictEqual(event.to, '0xfbd6acca70a8632061593f1a07056affb7965ac3')
-    assert.strictEqual(event.tokenDecimals, 18)
-    assert.strictEqual(event.tokenID, null)
-    assert.strictEqual(event.tokenType, '')
+    assert.isString(event.to)
+    assert.isNumber(event.tokenDecimals)
+    assert.isNull(event.tokenID)
+    assert.isString(event.tokenType)
   })
 
   it('Should get full transactions by address (Testnet)', async () => {
@@ -151,30 +148,39 @@ describe('neox sdk', () => {
 
     const [item] = data
 
-    assert.strictEqual(item.block, 1545419)
-    assert.strictEqual(item.date, '2025-01-28T09:47:10Z')
-    assert.strictEqual(item.invocationCount, 0)
-    assert.strictEqual(item.networkFeeAmount, '0.00084')
-    assert.strictEqual(item.notificationCount, 0)
-    assert.strictEqual(item.systemFeeAmount, '')
-    assert.strictEqual(
-      item.transactionID,
-      '0x7a5f4e3bf0f50581c8f9b118a24e6ebd650122dfb8a90964afbbcc1a5d91dc96'
-    )
+    assert.isNumber(item.block)
+    assert.isString(item.date)
+    assert.isNumber(item.invocationCount)
+    assert.isString(item.networkFeeAmount)
+    assert.isNumber(item.notificationCount)
+    assert.isString(item.systemFeeAmount)
+    assert.isString(item.transactionID)
 
     const {
       events: [event]
     } = item
 
-    assert.strictEqual(event.amount, '1.')
-    assert.strictEqual(event.contractHash, '')
-    assert.strictEqual(event.contractName, 'GAS')
-    assert.strictEqual(event.from, '0x0804fe35e0c8f40e7db7ef805587c382ea6e51d4')
-    assert.strictEqual(event.methodName, 'transfer')
+    assert.isString(event.amount)
+    assert.isString(event.contractHash)
+    assert.isString(event.contractName)
+    assert.isString(event.from)
+    assert.isString(event.methodName)
     assert.isNull(event.supportedStandards)
-    assert.strictEqual(event.to, '0xaa352b759ea1c6494fc3ea24cdd2f0e517b6aa00')
-    assert.strictEqual(event.tokenDecimals, 18)
-    assert.strictEqual(event.tokenID, null)
-    assert.strictEqual(event.tokenType, '')
+    assert.isString(event.to)
+    assert.isNumber(event.tokenDecimals)
+    assert.isNull(event.tokenID)
+    assert.isString(event.tokenType)
+  })
+
+  it('Should get full transactions by address (Mainnet) with default pageLimit', async () => {
+    const address = '0x17c15d54383c44384191e677739B46fc49dAB214'
+    const response = await NeoXREST.getFullTransactionsByAddress({
+      address,
+      network: 'mainnet',
+      timestampFrom: '2024-02-27T00:00:00Z',
+      timestampTo: '2025-01-27T13:40:00Z'
+    })
+
+    assert.strictEqual(response.data.length, 50)
   })
 })

@@ -72,6 +72,7 @@ export type CommonGetFullTransactionsByAddressParams = {
   timestampFrom: string
   timestampTo: string
   cursor?: string
+  pageLimit?: number
 }
 
 type FullTransactionsEvent = {

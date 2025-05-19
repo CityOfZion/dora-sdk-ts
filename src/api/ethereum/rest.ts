@@ -21,7 +21,11 @@ export class EthereumRESTApi {
       GetFullTransactionsByAddressResponse,
       AxiosResponse<GetFullTransactionsByAddressResponse>,
       AxiosGetFullTransactionsByAddressParams
-    >('/unified/activity-history', { ...params, protocol: 'ethereum' })
+    >('/unified/activity-history', {
+      pageLimit: 50,
+      ...params,
+      protocol: 'ethereum'
+    })
 
     return data
   }
