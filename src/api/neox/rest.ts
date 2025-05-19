@@ -74,7 +74,11 @@ export class NeoXRESTApi {
       GetFullTransactionsByAddressResponse,
       AxiosResponse<GetFullTransactionsByAddressResponse>,
       AxiosGetFullTransactionsByAddressParams
-    >('/unified/activity-history', { ...params, protocol: 'neox' })
+    >('/unified/activity-history', {
+      pageLimit: 50,
+      ...params,
+      protocol: 'neox'
+    })
 
     return data
   }
