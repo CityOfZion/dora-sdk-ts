@@ -3,6 +3,7 @@ import type { AxiosInstance, AxiosResponse } from 'axios'
 import axios from 'axios'
 import {
   AxiosGetFullTransactionsByAddressParams,
+  ExportFullTransactionsByAddressParams,
   GetFullTransactionsByAddressParams
 } from '../../interfaces/api/ethereum'
 import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
@@ -26,6 +27,17 @@ export class EthereumRESTApi {
       ...params,
       protocol: 'ethereum'
     })
+
+    return data
+  }
+
+  async exportFullTransactionsByAddress(
+    params: ExportFullTransactionsByAddressParams
+  ): Promise<string> {
+    const { data } = await this.axiosDoraV2.post<string>(
+      '/unified/activity-history-csv',
+      { ...params, protocol: 'ethereum' }
+    )
 
     return data
   }

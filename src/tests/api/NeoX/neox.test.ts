@@ -183,4 +183,38 @@ describe('neox sdk', () => {
 
     assert.strictEqual(response.data.length, 50)
   })
+
+  it('Should export full transactions by address (Mainnet)', async () => {
+    const address = '0x17c15d54383c44384191e677739B46fc49dAB214'
+    const response = await NeoXREST.exportFullTransactionsByAddress({
+      address,
+      network: 'mainnet',
+      timestampFrom: '2025-01-27T00:00:00Z',
+      timestampTo: '2025-01-27T13:40:00Z'
+    })
+
+    assert.isNotEmpty(
+      response.replace(
+        'Date;Block;Transaction ID;Network fee;System fee;Contract name;Contract hash;From;To;Amount;Token ID;Standards',
+        ''
+      )
+    )
+  })
+
+  it('Should export full transactions by address (Testnet)', async () => {
+    const address = '0x0804FE35E0c8f40E7DB7eF805587C382ea6E51d4'
+    const response = await NeoXREST.exportFullTransactionsByAddress({
+      address,
+      network: 'testnet',
+      timestampFrom: '2025-01-28T09:00:00Z',
+      timestampTo: '2025-01-28T11:01:00Z'
+    })
+
+    assert.isNotEmpty(
+      response.replace(
+        'Date;Block;Transaction ID;Network fee;System fee;Contract name;Contract hash;From;To;Amount;Token ID;Standards',
+        ''
+      )
+    )
+  })
 })

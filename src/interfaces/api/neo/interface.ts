@@ -1,4 +1,5 @@
 import {
+  CommonExportFullTransactionsByAddressParams,
   CommonGetFullTransactionsByAddressParams,
   TypedResponse,
   Witness
@@ -203,9 +204,15 @@ export interface Transfer {
   transferindex: string
 }
 
+export type NetworkType = 'mainnet' | 'testnet'
+
 export type GetFullTransactionsByAddressParams = {
-  network: 'mainnet' | 'testnet'
+  network: NetworkType
 } & CommonGetFullTransactionsByAddressParams
+
+export type ExportFullTransactionsByAddressParams = {
+  network: NetworkType
+} & CommonExportFullTransactionsByAddressParams
 
 export type AxiosGetFullTransactionsByAddressParams = {
   protocol: 'neo3'
