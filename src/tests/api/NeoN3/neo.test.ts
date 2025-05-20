@@ -282,7 +282,8 @@ describe('neo sdk', () => {
     assert.isString(event.tokenType)
   })
 
-  it('Should get full transactions by address (Mainnet) with default pageLimit', async () => {
+  // TODO: run and remove skip from this test when pageLimit is implemented in Dora
+  it.skip('Should get full transactions by address (Mainnet) with default pageLimit', async () => {
     const address = 'NYnfAZTcVfSfNgk4RnP2DBNgosq2tUN3U2'
     const response = await NeoN3REST.getFullTransactionsByAddress({
       address,
