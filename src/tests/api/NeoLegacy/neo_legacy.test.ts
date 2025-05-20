@@ -113,12 +113,12 @@ describe('neo legacy', () => {
   })
 
   it('Should get full transactions by address (Mainnet) with default pageLimit', async () => {
-    const address = 'AMzKt2E69onCrBQoBTQFMmBmqB9SRJvzvE'
+    const address = 'AJSK3qFtfCXdq7MD9AmTTwNtSjkA2k1xyt'
     const response = await NeoLegacyREST.getFullTransactionsByAddress({
       address,
       network: 'mainnet',
-      timestampFrom: '2025-02-16T00:00:00Z',
-      timestampTo: '2025-05-16T00:00:00Z'
+      timestampFrom: '2022-06-16T00:00:00Z',
+      timestampTo: '2023-05-16T00:00:00Z'
     })
 
     assert.strictEqual(response.data.length, 15)
