@@ -75,6 +75,12 @@ export type CommonGetFullTransactionsByAddressParams = {
   pageLimit?: number
 }
 
+export type CommonExportFullTransactionsByAddressParams = {
+  address: string
+  timestampFrom: string
+  timestampTo: string
+}
+
 type FullTransactionsEvent = {
   amount: string
   from: string | null

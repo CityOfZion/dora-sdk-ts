@@ -21,7 +21,8 @@ import type {
   TransactionsResponse,
   TransferHistoryResponse,
   AxiosGetFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams
+  GetFullTransactionsByAddressParams,
+  ExportFullTransactionsByAddressParams
 } from '../../interfaces/api/neo_legacy'
 import type { RestConfig } from '../../interfaces'
 import { DORA_URL } from '../../constants'
@@ -221,6 +222,17 @@ export class NeoLegacyRESTApi {
       ...params,
       protocol: 'neolegacy'
     })
+
+    return data
+  }
+
+  async exportFullTransactionsByAddress(
+    params: ExportFullTransactionsByAddressParams
+  ): Promise<string> {
+    const { data } = await this.axiosDoraV2.post<string>(
+      '/unified/activity-history-csv',
+      { ...params, protocol: 'neolegacy' }
+    )
 
     return data
   }

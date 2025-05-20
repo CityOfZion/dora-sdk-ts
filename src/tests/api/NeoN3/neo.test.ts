@@ -294,4 +294,38 @@ describe('neo sdk', () => {
 
     assert.strictEqual(response.data.length, 50)
   })
+
+  it('Should export full transactions by address (Mainnet)', async () => {
+    const address = 'NYnfAZTcVfSfNgk4RnP2DBNgosq2tUN3U2'
+    const response = await NeoN3REST.exportFullTransactionsByAddress({
+      address,
+      network: 'mainnet',
+      timestampFrom: '2024-07-26T07:31:23Z',
+      timestampTo: '2024-07-26T07:32:30Z'
+    })
+
+    assert.isNotEmpty(
+      response.replace(
+        'Date;Block;Transaction ID;Network fee;System fee;Contract name;Contract hash;From;To;Amount;Token ID;Standards',
+        ''
+      )
+    )
+  })
+
+  it('Should export full transactions by address (Testnet)', async () => {
+    const address = 'Ng6QMqCFfxqiXwi6QJUkMXXacRPfFGC5BW'
+    const response = await NeoN3REST.exportFullTransactionsByAddress({
+      address,
+      network: 'testnet',
+      timestampFrom: '2025-01-28T06:30:40Z',
+      timestampTo: '2025-01-28T06:30:51Z'
+    })
+
+    assert.isNotEmpty(
+      response.replace(
+        'Date;Block;Transaction ID;Network fee;System fee;Contract name;Contract hash;From;To;Amount;Token ID;Standards',
+        ''
+      )
+    )
+  })
 })

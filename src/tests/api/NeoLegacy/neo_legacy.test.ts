@@ -123,4 +123,20 @@ describe('neo legacy', () => {
 
     assert.strictEqual(response.data.length, 15)
   })
+
+  it('Should export full transactions by address (Mainnet)', async () => {
+    const address = 'AXFhnmWZ9tz66L4rcWSrjjxEkK6p4wzH9z'
+    const response = await NeoLegacyREST.exportFullTransactionsByAddress({
+      address,
+      network: 'mainnet',
+      timestampFrom: '2023-04-05T00:00:00Z',
+      timestampTo: '2023-04-06T00:00:00Z'
+    })
+    assert.isNotEmpty(
+      response.replace(
+        'Date;Block;Transaction ID;Network fee;System fee;Contract name;Contract hash;From;To;Amount;Token ID;Standards',
+        ''
+      )
+    )
+  })
 })

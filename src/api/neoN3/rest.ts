@@ -19,7 +19,8 @@ import type {
   TransferHistoryResponse,
   VoterResponse,
   AxiosGetFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams
+  GetFullTransactionsByAddressParams,
+  ExportFullTransactionsByAddressParams
 } from '../../interfaces/api/neo'
 import type { RestConfig } from '../../interfaces'
 import { DORA_URL } from '../../constants'
@@ -232,6 +233,17 @@ export class NeoRESTApi {
       ...params,
       protocol: 'neo3'
     })
+
+    return data
+  }
+
+  async exportFullTransactionsByAddress(
+    params: ExportFullTransactionsByAddressParams
+  ): Promise<string> {
+    const { data } = await this.axiosDoraV2.post<string>(
+      '/unified/activity-history-csv',
+      { ...params, protocol: 'neo3' }
+    )
 
     return data
   }

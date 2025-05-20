@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  CommonExportFullTransactionsByAddressParams,
   CommonGetFullTransactionsByAddressParams,
   TypedResponse,
   Witness
@@ -113,9 +115,15 @@ export interface Transaction {
   vout?: []
 }
 
+export type NetworkType = 'mainnet'
+
 export type GetFullTransactionsByAddressParams = {
-  network: 'mainnet'
+  network: NetworkType
 } & CommonGetFullTransactionsByAddressParams
+
+export type ExportFullTransactionsByAddressParams = {
+  network: NetworkType
+} & CommonExportFullTransactionsByAddressParams
 
 export type AxiosGetFullTransactionsByAddressParams = {
   protocol: 'neolegacy'

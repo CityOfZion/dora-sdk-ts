@@ -9,7 +9,8 @@ import type {
   Stats,
   Transaction,
   AxiosGetFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams
+  GetFullTransactionsByAddressParams,
+  ExportFullTransactionsByAddressParams
 } from '../../interfaces/api/neox'
 import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 
@@ -79,6 +80,17 @@ export class NeoXRESTApi {
       ...params,
       protocol: 'neox'
     })
+
+    return data
+  }
+
+  async exportFullTransactionsByAddress(
+    params: ExportFullTransactionsByAddressParams
+  ): Promise<string> {
+    const { data } = await this.axiosDoraV2.post<string>(
+      '/unified/activity-history-csv',
+      { ...params, protocol: 'neox' }
+    )
 
     return data
   }

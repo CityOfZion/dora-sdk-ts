@@ -1,4 +1,7 @@
-import { CommonGetFullTransactionsByAddressParams } from '../common'
+import {
+  CommonExportFullTransactionsByAddressParams,
+  CommonGetFullTransactionsByAddressParams
+} from '../common'
 
 export interface Address {
   hash: string
@@ -207,9 +210,15 @@ export interface Stats {
   network_utilization_percentage: number
 }
 
+export type NetworkType = 'mainnet' | 'testnet'
+
 export type GetFullTransactionsByAddressParams = {
-  network: 'mainnet' | 'testnet'
+  network: NetworkType
 } & CommonGetFullTransactionsByAddressParams
+
+export type ExportFullTransactionsByAddressParams = {
+  network: NetworkType
+} & CommonExportFullTransactionsByAddressParams
 
 export type AxiosGetFullTransactionsByAddressParams = {
   protocol: 'neox'
