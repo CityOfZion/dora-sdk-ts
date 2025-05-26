@@ -62,6 +62,11 @@ export interface TypedResponse {
   value?: string
 }
 
+export type StateResponse = {
+  type: string
+  value?: string | TypedResponse[]
+}
+
 export interface Witness {
   invocation: string
   verification: string

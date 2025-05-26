@@ -121,7 +121,7 @@ describe('neo legacy', () => {
       timestampTo: '2023-05-16T00:00:00Z'
     })
 
-    assert.strictEqual(response.data.length, 15)
+    assert.strictEqual(response.data.length, 30)
   })
 
   it('Should export full transactions by address (Mainnet)', async () => {

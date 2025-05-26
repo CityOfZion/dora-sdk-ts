@@ -2,7 +2,7 @@
 import {
   CommonExportFullTransactionsByAddressParams,
   CommonGetFullTransactionsByAddressParams,
-  TypedResponse,
+  StateResponse,
   Witness
 } from '../common'
 
@@ -88,7 +88,7 @@ export interface InputOutput {
 
 export interface Notification {
   contract: string
-  state: TypedResponse
+  state?: StateResponse | StateResponse[]
 }
 
 export interface TimedBalance {
