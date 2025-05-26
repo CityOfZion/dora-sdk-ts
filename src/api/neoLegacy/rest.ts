@@ -218,7 +218,7 @@ export class NeoLegacyRESTApi {
       AxiosResponse<GetFullTransactionsByAddressResponse>,
       AxiosGetFullTransactionsByAddressParams
     >('/unified/activity-history', {
-      pageLimit: 15,
+      pageLimit: 30,
       ...params,
       protocol: 'neolegacy'
     })

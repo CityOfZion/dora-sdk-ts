@@ -1,7 +1,7 @@
 import {
   CommonExportFullTransactionsByAddressParams,
   CommonGetFullTransactionsByAddressParams,
-  TypedResponse,
+  StateResponse,
   Witness
 } from '../common'
 
@@ -128,7 +128,7 @@ export interface NEF {
 export interface Notification {
   contract: string
   event_name: string
-  state: TypedResponse[]
+  state?: StateResponse | StateResponse[]
 }
 
 export interface Parameter {
