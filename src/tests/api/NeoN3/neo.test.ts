@@ -90,11 +90,6 @@ describe('neo sdk', () => {
     assert.isObject(res)
   })
 
-  it('should get nodes', async () => {
-    const res = await NeoN3REST.getAllNodes('testnet')
-    assert.isNotNull(res)
-  })
-
   it('should get the block height', async () => {
     const res = await NeoN3REST.height('testnet')
     assert.isNotNull(res)

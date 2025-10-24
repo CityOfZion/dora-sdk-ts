@@ -3,7 +3,6 @@ import {
   ContractInvocationStats,
   Balance,
   Block,
-  NodeMetaData,
   TransferAbstract,
   TypedResponse,
   Witness
@@ -87,8 +86,6 @@ export interface ContractsResponse {
   totalCount: number
 }
 
-export type GetAllNodesResponse = NodeMetaData[]
-
 export interface HeightResponse {
   height: number
 }
@@ -107,7 +104,6 @@ export interface LogResponse {
 }
 
 export type TokenProvenanceResponse = Provenance[]
-
 
 export type TransactionResponse = Transaction
 
