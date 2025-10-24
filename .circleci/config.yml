@@ -3,7 +3,7 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/dora-sdk-ts
   docker:
-    - image: cimg/node:18.17.0
+    - image: cimg/node:22.21.0
 
 jobs:
   test:
