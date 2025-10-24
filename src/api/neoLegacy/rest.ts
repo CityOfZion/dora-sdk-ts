@@ -50,7 +50,7 @@ export class NeoLegacyRESTApi {
     }
 
     this.axios = axios.create(axiosConfig)
-    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2/` })
+    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2` })
   }
 
   async addressStats(
