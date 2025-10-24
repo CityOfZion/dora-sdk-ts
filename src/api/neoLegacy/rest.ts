@@ -10,7 +10,6 @@ import type {
   ContractTransfersResponse,
   GetAddressAbstractsResponse,
   GetAllNodesResponse,
-  GetClaimableResponse,
   GetUnclaimedResponse,
   HeightResponse,
   InvocationStatsResponse,
@@ -32,7 +31,7 @@ import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/commo
 
 const DefaultLegacyRestConfig: RestConfig = {
   doraUrl: DORA_URL,
-  endpoint: '/api/v1/neo2'
+  endpoint: '/api/v2/neo2'
 }
 
 export class NeoLegacyRESTApi {
@@ -136,14 +135,6 @@ export class NeoLegacyRESTApi {
   async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
     return await this.get(network, method)
-  }
-
-  async getClaimable(
-    address: string,
-    network = 'mainnet'
-  ): Promise<GetClaimableResponse> {
-    const method = 'get_claimable'
-    return await this.get(network, method, address)
   }
 
   async getUnclaimed(
