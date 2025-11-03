@@ -1,33 +1,8 @@
 import { assert } from 'chai'
+
 import { NeoLegacyREST } from '../../../api'
 
 describe('neo legacy', () => {
-  // timeout
-  // it('should get address_stats', async () => {
-  //   const res = await NeoLegacyREST.addressStats(
-  //     'AZ3JaZ9myjiW98hwLvc3F4RQVvVX4Pm83M'
-  //   )
-  //   assert.isNotNull(res)
-  //   assert.strictEqual(res.length, 14)
-  // }).timeout(60000)
-
-  // timeout
-  // it("should get an address' abstract fields", async () => {
-  //   const res = await NeoLegacyREST.getAddressAbstracts(
-  //     'ANeo2toNeo3MigrationAddressxwPB2Hz'
-  //   )
-  //   assert.isNotNull(res)
-  //   assert.strictEqual(res.entries.length, 15)
-  // })
-
-  it('should get the unclaimed metadata', async () => {
-    const res = await NeoLegacyREST.getUnclaimed(
-      'AciSRoWhAF95rvJVkWX38XfNPLLDjWEsoE'
-    )
-    assert.isNotNull(res)
-    assert.strictEqual(Object.keys(res).length, 3)
-  })
-
   it('should get an asset', async () => {})
 
   it('should get assets', async () => {})
@@ -130,5 +105,17 @@ describe('neo legacy', () => {
         ''
       )
     )
+  })
+
+  it('Should be able to get unclaimed token using an address', async () => {
+    const response = await NeoLegacyREST.getUnclaimed(
+      'AQB8KjskTmRghCS3kMzxBNxKwT6b9kKM4v'
+    )
+
+    assert.deepEqual(response, {
+      available: 0,
+      unavailable: 365.08246065,
+      unclaimed: 365.08246065
+    })
   })
 })

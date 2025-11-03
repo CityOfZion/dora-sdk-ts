@@ -1,15 +1,24 @@
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
+
+import { DORA_URL } from '../../constants'
+import type { RestConfig } from '../../interfaces'
+import type { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 import type {
   AddressStatsResponse,
   AssetResponse,
   AssetsResponse,
+  AxiosGetFullTransactionsByAddressParams,
   BalanceResponse,
   BlockResponse,
   BlocksResponse,
   ContractResponse,
   ContractsResponse,
   ContractTransfersResponse,
+  ExportFullTransactionsByAddressParams,
   GetAddressAbstractsResponse,
   GetAllNodesResponse,
+  GetFullTransactionsByAddressParams,
   GetUnclaimedResponse,
   HeightResponse,
   InvocationStatsResponse,
@@ -18,16 +27,8 @@ import type {
   TransactionAbstractsResponse,
   TransactionResponse,
   TransactionsResponse,
-  TransferHistoryResponse,
-  AxiosGetFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams,
-  ExportFullTransactionsByAddressParams
+  TransferHistoryResponse
 } from '../../interfaces/api/neo_legacy'
-import type { RestConfig } from '../../interfaces'
-import { DORA_URL } from '../../constants'
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import axios from 'axios'
-import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 
 const DefaultLegacyRestConfig: RestConfig = {
   doraUrl: DORA_URL,
@@ -108,8 +109,7 @@ export class NeoLegacyRESTApi {
   async contractStats(
     contractHash: string,
     network = 'mainnet'
-    // eslint-disable-next-line @typescript-eslint/ban-types
-  ): Promise<Object> {
+  ): Promise<object> {
     const method = 'contract_stats'
     return await this.get(network, method)
   }
@@ -135,14 +135,6 @@ export class NeoLegacyRESTApi {
   async getAllNodes(network = 'mainnet'): Promise<GetAllNodesResponse> {
     const method = 'get_all_nodes'
     return await this.get(network, method)
-  }
-
-  async getUnclaimed(
-    address: string,
-    network = 'mainnet'
-  ): Promise<GetUnclaimedResponse> {
-    const method = 'get_unclaimed'
-    return await this.get(network, method, address)
   }
 
   async height(network = 'mainnet'): Promise<HeightResponse> {
@@ -201,6 +193,13 @@ export class NeoLegacyRESTApi {
     return await this.get(network, method, address, page)
   }
 
+  async getUnclaimed(
+    address: string,
+    network = 'mainnet'
+  ): Promise<GetUnclaimedResponse> {
+    return await this.get(network, 'get_unclaimed', address)
+  }
+
   async getFullTransactionsByAddress(
     params: GetFullTransactionsByAddressParams
   ): Promise<GetFullTransactionsByAddressResponse> {
@@ -228,7 +227,6 @@ export class NeoLegacyRESTApi {
     return data
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async get(...args: any[]) {
     const endpoint = args.join('/')
     const { data } = await this.axios.get(`/${endpoint}`)
