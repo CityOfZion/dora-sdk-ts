@@ -1,4 +1,13 @@
-import {
+import type {
+  AddressAbstractEntry,
+  Balance,
+  Block,
+  ContractInvocationStats,
+  NodeMetaData,
+  TransferAbstract,
+  Witness
+} from '../common'
+import type {
   ApplicationLog,
   Asset,
   ContractMetaData,
@@ -9,15 +18,6 @@ import {
   TimedBalance,
   Transaction
 } from './interface'
-import {
-  AddressAbstractEntry,
-  Balance,
-  Block,
-  ContractInvocationStats,
-  NodeMetaData,
-  TransferAbstract,
-  Witness
-} from '../common'
 
 export type AddressStatsResponse = {
   asset: string
@@ -82,12 +82,6 @@ export interface GetAddressAbstractsResponse {
 
 export type GetAllNodesResponse = NodeMetaData[]
 
-export interface GetUnclaimedResponse {
-  available: number
-  unavailable: number
-  unclaimed: number
-}
-
 export interface HeightResponse {
   height: number
 }
@@ -122,4 +116,10 @@ export interface TransactionAbstractsResponse {
 export interface TransferHistoryResponse {
   items: TransferAbstract[]
   totalCount: number
+}
+
+export type GetUnclaimedResponse = {
+  available: number
+  unavailable: number
+  unclaimed: number
 }
