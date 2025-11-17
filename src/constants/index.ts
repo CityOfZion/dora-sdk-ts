@@ -1,1 +1,1 @@
-export const DORA_URL = 'https://api.coz.io'
+export const COZ_API_URL = 'https://api.coz.io'
