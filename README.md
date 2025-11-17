@@ -5,14 +5,14 @@
     width="125px;">
 </p>
 
-<h1 align="center">dora</h1>
+<h1 align="center">Dora</h1>
 
 <p align="center">
   Typescript SDK for the Dora platform
 </p>
 
 <p align="center">
-  <a href="https://circleci.com/gh/CityOfZion/dora" aria-label="CircleCI">
+  <a href="https://circleci.com/gh/CityOfZion/dora-sdk-ts" aria-label="CircleCI">
     <img src="https://circleci.com/gh/CityOfZion/dora-sdk-ts.svg?style=svg" alt="CircleCI">
   </a>
 </p>
