@@ -1,4 +1,4 @@
 export interface RestConfig {
-  doraUrl: string
+  url: string
   endpoint: string
 }

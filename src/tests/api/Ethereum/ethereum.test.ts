@@ -1,7 +1,13 @@
 import { assert } from 'chai'
 import { EthereumREST } from '../../../api'
+import { sleep } from '../utils'
 
 describe('Ethereum SDK', () => {
+  beforeEach(async () => {
+    // Avoid request timeouts
+    await sleep(2000)
+  })
+
   it('Should get full transactions by address (Ethereum Mainnet)', async () => {
     const address = '0xc1E563e0bA11485861198e32e25C216B312B219a'
     const response = await EthereumREST.getFullTransactionsByAddress({

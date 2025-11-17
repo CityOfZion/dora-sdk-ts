@@ -1,5 +1,4 @@
-import type { RestConfig } from '../../interfaces'
-import { DORA_URL } from '../../constants'
+import { COZ_API_URL } from '../../constants'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import type {
@@ -13,29 +12,32 @@ import type {
   ExportFullTransactionsByAddressParams
 } from '../../interfaces/api/neox'
 import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
+import { RestConfig } from '../../interfaces'
 
-const DefaultNeoXRestConfig: RestConfig = {
-  doraUrl: DORA_URL,
+const defaultRestConfig: RestConfig = {
+  url: COZ_API_URL,
   endpoint: '/api/neox'
 }
 
 export class NeoXRESTApi {
-  private axiosDoraV2: AxiosInstance
+  private axiosApiV2: AxiosInstance
 
   protected axios: AxiosInstance
 
   public constructor(
-    restConfig: RestConfig = DefaultNeoXRestConfig,
+    restConfig: RestConfig = defaultRestConfig,
     axiosConfig?: AxiosRequestConfig
   ) {
-    if (typeof axiosConfig === 'undefined') {
-      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint }
+    const baseURL = `${restConfig.url}${restConfig.endpoint}`
+
+    if (axiosConfig === undefined) {
+      axiosConfig = { baseURL }
     } else {
-      axiosConfig['baseURL'] = restConfig.doraUrl + restConfig.endpoint
+      axiosConfig['baseURL'] = baseURL
     }
 
     this.axios = axios.create(axiosConfig)
-    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2` })
+    this.axiosApiV2 = axios.create({ baseURL: `${COZ_API_URL}/api/v2` })
   }
 
   async getAddress(addressHash: string, network = 'mainnet'): Promise<Address> {
@@ -71,7 +73,7 @@ export class NeoXRESTApi {
   async getFullTransactionsByAddress(
     params: GetFullTransactionsByAddressParams
   ): Promise<GetFullTransactionsByAddressResponse> {
-    const { data } = await this.axiosDoraV2.post<
+    const { data } = await this.axiosApiV2.post<
       GetFullTransactionsByAddressResponse,
       AxiosResponse<GetFullTransactionsByAddressResponse>,
       AxiosGetFullTransactionsByAddressParams
@@ -87,7 +89,7 @@ export class NeoXRESTApi {
   async exportFullTransactionsByAddress(
     params: ExportFullTransactionsByAddressParams
   ): Promise<string> {
-    const { data } = await this.axiosDoraV2.post<string>(
+    const { data } = await this.axiosApiV2.post<string>(
       '/unified/activity-history-csv',
       { ...params, protocol: 'neox' }
     )

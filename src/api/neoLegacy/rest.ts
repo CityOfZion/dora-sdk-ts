@@ -1,7 +1,7 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 
-import { DORA_URL } from '../../constants'
+import { COZ_API_URL } from '../../constants'
 import type { RestConfig } from '../../interfaces'
 import type { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
 import type {
@@ -30,28 +30,30 @@ import type {
   TransferHistoryResponse
 } from '../../interfaces/api/neo_legacy'
 
-const DefaultLegacyRestConfig: RestConfig = {
-  doraUrl: DORA_URL,
+const defaultRestConfig: RestConfig = {
+  url: COZ_API_URL,
   endpoint: '/api/v2/neo2'
 }
 
 export class NeoLegacyRESTApi {
-  private axiosDoraV2: AxiosInstance
+  private axiosApiV2: AxiosInstance
 
   protected axios: AxiosInstance
 
   public constructor(
-    restConfig: RestConfig = DefaultLegacyRestConfig,
+    restConfig: RestConfig = defaultRestConfig,
     axiosConfig?: AxiosRequestConfig
   ) {
-    if (typeof axiosConfig === 'undefined') {
-      axiosConfig = { baseURL: restConfig.doraUrl + restConfig.endpoint }
+    const baseURL = `${restConfig.url}${restConfig.endpoint}`
+
+    if (axiosConfig === undefined) {
+      axiosConfig = { baseURL }
     } else {
-      axiosConfig['baseURL'] = restConfig.doraUrl + restConfig.endpoint
+      axiosConfig['baseURL'] = baseURL
     }
 
     this.axios = axios.create(axiosConfig)
-    this.axiosDoraV2 = axios.create({ baseURL: `${DORA_URL}/api/v2` })
+    this.axiosApiV2 = axios.create({ baseURL: `${COZ_API_URL}/api/v2` })
   }
 
   async addressStats(
@@ -203,7 +205,7 @@ export class NeoLegacyRESTApi {
   async getFullTransactionsByAddress(
     params: GetFullTransactionsByAddressParams
   ): Promise<GetFullTransactionsByAddressResponse> {
-    const { data } = await this.axiosDoraV2.post<
+    const { data } = await this.axiosApiV2.post<
       GetFullTransactionsByAddressResponse,
       AxiosResponse<GetFullTransactionsByAddressResponse>,
       AxiosGetFullTransactionsByAddressParams
@@ -219,7 +221,7 @@ export class NeoLegacyRESTApi {
   async exportFullTransactionsByAddress(
     params: ExportFullTransactionsByAddressParams
   ): Promise<string> {
-    const { data } = await this.axiosDoraV2.post<string>(
+    const { data } = await this.axiosApiV2.post<string>(
       '/unified/activity-history-csv',
       { ...params, protocol: 'neolegacy' }
     )
