@@ -137,6 +137,11 @@ Use `api.EthereumREST` for unified activity-history workflows currently exposed 
 5. Pass the correct network explicitly when the environment is not obvious.
 6. Handle request failures clearly rather than swallowing them.
 7. If the endpoint is missing, propose extending the SDK rather than creating hidden one-off transport logic.
+8. When validating this skill itself, test it in a fresh Node app that installs the published npm package `@cityofzion/dora-ts` rather than wiring the SDK from a local repo checkout.
+9. Use simple read-only smoke tests first, such as chain height or stats calls, before attempting more specialized history-export workflows.
+10. For Neo N3 address analysis, prefer starting with `balance`, `addressTransactions`, and `voter` because these have been the most reliable read-only surfaces in fresh-app validation.
+11. Treat `transferHistory` and `getFullTransactionsByAddress` as higher-risk follow-on methods during exploratory address work; probe them after baseline methods succeed and capture exact status/error behavior if they fail.
+12. When the goal is behavioral analysis rather than export completeness, derive a first-pass activity view from `addressTransactions.items[*].transfers` and `addressTransactions.items[*].invocations` before escalating to heavier history endpoints.
 
 ## Example usage
 
@@ -166,7 +171,8 @@ import { api } from '@cityofzion/dora-ts'
 
 const history = await api.NeoN3REST.getFullTransactionsByAddress({
   address: 'Nb9QYTVx8F6j5kKi1k1ERaUTFfSX5JRq2D',
-  page: 1
+  page: 1,
+  network: 'mainnet'
 })
 ```
 
@@ -180,7 +186,8 @@ import { api } from '@cityofzion/dora-ts'
 export async function getAddressActivity(address: string) {
   return await api.NeoN3REST.getFullTransactionsByAddress({
     address,
-    page: 1
+    page: 1,
+    network: 'mainnet'
   })
 }
 ```
@@ -205,6 +212,12 @@ Avoid replacing the SDK with custom `axios` code unless one of these is true:
 - Some methods use hashes, others use block heights or addresses; do not guess inputs.
 - Unified activity-history methods are protocol-backed and set protocol internally.
 - README guidance in this repo is currently light; inspect exported modules and implementation before claiming support for an endpoint.
+- A successful install may still report third-party `npm audit` warnings; do not confuse dependency audit output with proof that the SDK import or basic read-only API usage is broken.
+- Validate package usability with a minimal import-and-query smoke test before escalating install-time warnings as SDK failures.
+- In fresh-app Neo N3 validation, `addressTransactions` has been useful not just for transaction lists but also for lightweight first-pass behavior analysis via embedded `transfers` and `invocations` data.
+- Do not assume history-oriented Neo N3 methods are equally reliable for every address or environment; observed failures included `transferHistory` returning `503` during otherwise successful address analysis.
+- In fresh-app validation, `getFullTransactionsByAddress` returned `400 network is required` when called without `network` in the params object. Do not assume this method inherits the same network-handling pattern as simpler position-argument methods; pass `network` explicitly in the params.
+- When these higher-order history methods fail, report the exact method, input shape, network, and returned status/message instead of collapsing the result into a generic “SDK broken” claim.
 
 ## If extending this SDK
 
