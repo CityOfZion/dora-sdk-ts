@@ -14,7 +14,7 @@
   },
   "private": false,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "node -e \"const fs=require('fs'); if (fs.existsSync('.git')) { require('child_process').execSync('npx husky install', { stdio: 'inherit' }); }\"",
     "prebuild": "rimraf dist",
     "build": "tsc",
     "test": "mocha 'src/**/*.test.ts'",
@@ -52,5 +52,10 @@
     "*.{json,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }

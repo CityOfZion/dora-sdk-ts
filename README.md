@@ -19,9 +19,15 @@
 
 ## Quickstart:
 
-### Initial test and execution
+### Install and use
 1. Install dependencies: `npm install @cityofzion/dora-ts`
-2. Build SDK: `npm run build`
+2. Import the SDK in your project and start calling the API clients.
+
+Published packages and repository checkouts include the compiled `dist/` artifacts, so consumers do not need to build the SDK after installation.
+
+### Local development
+1. Install repository dependencies: `npm install`
+2. Rebuild after source changes: `npm run build`
 3. Run tests: `npm run test`
 
 ### General Use
