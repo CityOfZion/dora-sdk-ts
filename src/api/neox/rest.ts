@@ -7,11 +7,11 @@ import type {
   Blocks,
   Stats,
   Transaction,
-  AxiosGetFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams,
-  ExportFullTransactionsByAddressParams
+  AxiosActivityHistoryParams,
+  ActivityHistoryParams,
+  ExportActivityHistoryParams
 } from '../../interfaces/api/neox'
-import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
+import { ActivityHistoryResponse } from '../../interfaces/api/common'
 import { RestConfig } from '../../interfaces'
 
 const defaultRestConfig: RestConfig = {
@@ -71,12 +71,12 @@ export class NeoXRESTApi {
   }
 
   async getFullTransactionsByAddress(
-    params: GetFullTransactionsByAddressParams
-  ): Promise<GetFullTransactionsByAddressResponse> {
+    params: ActivityHistoryParams
+  ): Promise<ActivityHistoryResponse> {
     const { data } = await this.axiosApiV2.post<
-      GetFullTransactionsByAddressResponse,
-      AxiosResponse<GetFullTransactionsByAddressResponse>,
-      AxiosGetFullTransactionsByAddressParams
+      ActivityHistoryResponse,
+      AxiosResponse<ActivityHistoryResponse>,
+      AxiosActivityHistoryParams
     >('/unified/activity-history', {
       pageLimit: 50,
       ...params,
@@ -87,7 +87,7 @@ export class NeoXRESTApi {
   }
 
   async exportFullTransactionsByAddress(
-    params: ExportFullTransactionsByAddressParams
+    params: ExportActivityHistoryParams
   ): Promise<string> {
     const { data } = await this.axiosApiV2.post<string>(
       '/unified/activity-history-csv',

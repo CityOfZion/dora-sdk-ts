@@ -86,7 +86,7 @@ export type CommonExportFullTransactionsByAddressParams = {
   timestampTo: string
 }
 
-type FullTransactionsEvent = {
+export type ActivityHistoryEvent = {
   amount: string
   from: string | null
   to: string | null
@@ -99,7 +99,7 @@ type FullTransactionsEvent = {
   tokenType: string
 }
 
-type FullTransactionsItem = {
+export type ActivityHistoryItem = {
   transactionID: string
   block: number
   date: string
@@ -107,13 +107,15 @@ type FullTransactionsItem = {
   notificationCount: number
   networkFeeAmount: string
   systemFeeAmount: string
-  events: FullTransactionsEvent[]
+  events: ActivityHistoryEvent[]
 }
 
-export type GetFullTransactionsByAddressResponse = {
+export type ActivityHistoryResponse = {
   address: string
   protocol: string
   network: string
   nextCursor: string
-  data: FullTransactionsItem[]
+  data: ActivityHistoryItem[]
 }
+
+export type GetFullTransactionsByAddressResponse = ActivityHistoryResponse

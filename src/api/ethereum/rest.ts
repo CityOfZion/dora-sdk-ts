@@ -2,11 +2,11 @@ import { COZ_API_URL } from '../../constants'
 import type { AxiosInstance, AxiosResponse } from 'axios'
 import axios from 'axios'
 import {
-  AxiosGetFullTransactionsByAddressParams,
-  ExportFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams
+  AxiosActivityHistoryParams,
+  ExportActivityHistoryParams,
+  ActivityHistoryParams
 } from '../../interfaces/api/ethereum'
-import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
+import { ActivityHistoryResponse } from '../../interfaces/api/common'
 
 export class EthereumRESTApi {
   private axiosApiV2: AxiosInstance
@@ -16,12 +16,12 @@ export class EthereumRESTApi {
   }
 
   async getFullTransactionsByAddress(
-    params: GetFullTransactionsByAddressParams
-  ): Promise<GetFullTransactionsByAddressResponse> {
+    params: ActivityHistoryParams
+  ): Promise<ActivityHistoryResponse> {
     const { data } = await this.axiosApiV2.post<
-      GetFullTransactionsByAddressResponse,
-      AxiosResponse<GetFullTransactionsByAddressResponse>,
-      AxiosGetFullTransactionsByAddressParams
+      ActivityHistoryResponse,
+      AxiosResponse<ActivityHistoryResponse>,
+      AxiosActivityHistoryParams
     >('/unified/activity-history', {
       pageLimit: 50,
       ...params,
@@ -32,7 +32,7 @@ export class EthereumRESTApi {
   }
 
   async exportFullTransactionsByAddress(
-    params: ExportFullTransactionsByAddressParams
+    params: ExportActivityHistoryParams
   ): Promise<string> {
     const { data } = await this.axiosApiV2.post<string>(
       '/unified/activity-history-csv',
