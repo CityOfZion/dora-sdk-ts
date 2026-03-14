@@ -26,3 +26,6 @@
 
 ### General Use
 For workflows and SDK usage, refer to the [tests](./src/tests) directory.
+
+## Agent Skill
+For agent-oriented implementation guidance, see [skills/dora-sdk-agent-usage/SKILL.md](./skills/dora-sdk-agent-usage/SKILL.md).
