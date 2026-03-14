@@ -3,22 +3,22 @@ import axios from 'axios'
 
 import { COZ_API_URL } from '../../constants'
 import type { RestConfig } from '../../interfaces'
-import type { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
+import type { ActivityHistoryResponse } from '../../interfaces/api/common'
 import type {
   AddressStatsResponse,
   AssetResponse,
   AssetsResponse,
-  AxiosGetFullTransactionsByAddressParams,
+  AxiosActivityHistoryParams,
   BalanceResponse,
   BlockResponse,
   BlocksResponse,
   ContractResponse,
   ContractsResponse,
   ContractTransfersResponse,
-  ExportFullTransactionsByAddressParams,
+  ExportActivityHistoryParams,
   GetAddressAbstractsResponse,
   GetAllNodesResponse,
-  GetFullTransactionsByAddressParams,
+  ActivityHistoryParams,
   GetUnclaimedResponse,
   HeightResponse,
   InvocationStatsResponse,
@@ -203,12 +203,12 @@ export class NeoLegacyRESTApi {
   }
 
   async getFullTransactionsByAddress(
-    params: GetFullTransactionsByAddressParams
-  ): Promise<GetFullTransactionsByAddressResponse> {
+    params: ActivityHistoryParams
+  ): Promise<ActivityHistoryResponse> {
     const { data } = await this.axiosApiV2.post<
-      GetFullTransactionsByAddressResponse,
-      AxiosResponse<GetFullTransactionsByAddressResponse>,
-      AxiosGetFullTransactionsByAddressParams
+      ActivityHistoryResponse,
+      AxiosResponse<ActivityHistoryResponse>,
+      AxiosActivityHistoryParams
     >('/unified/activity-history', {
       pageLimit: 30,
       ...params,
@@ -219,7 +219,7 @@ export class NeoLegacyRESTApi {
   }
 
   async exportFullTransactionsByAddress(
-    params: ExportFullTransactionsByAddressParams
+    params: ExportActivityHistoryParams
   ): Promise<string> {
     const { data } = await this.axiosApiV2.post<string>(
       '/unified/activity-history-csv',

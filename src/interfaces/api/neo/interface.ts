@@ -206,14 +206,20 @@ export interface Transfer {
 
 export type NetworkType = 'mainnet' | 'testnet'
 
-export type GetFullTransactionsByAddressParams = {
+export type ActivityHistoryParams = {
   network: NetworkType
 } & CommonGetFullTransactionsByAddressParams
 
-export type ExportFullTransactionsByAddressParams = {
+export type GetFullTransactionsByAddressParams = ActivityHistoryParams
+
+export type ExportActivityHistoryParams = {
   network: NetworkType
 } & CommonExportFullTransactionsByAddressParams
 
-export type AxiosGetFullTransactionsByAddressParams = {
+export type ExportFullTransactionsByAddressParams = ExportActivityHistoryParams
+
+export type AxiosActivityHistoryParams = {
   protocol: 'neo3'
-} & GetFullTransactionsByAddressParams
+} & ActivityHistoryParams
+
+export type AxiosGetFullTransactionsByAddressParams = AxiosActivityHistoryParams

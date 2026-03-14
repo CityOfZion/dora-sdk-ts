@@ -10,14 +10,20 @@ export type NetworkType =
   | '137'
   | (string & NonNullable<unknown>)
 
-export type GetFullTransactionsByAddressParams = {
+export type ActivityHistoryParams = {
   network: NetworkType
 } & CommonGetFullTransactionsByAddressParams
 
-export type AxiosGetFullTransactionsByAddressParams = {
-  protocol: 'ethereum'
-} & GetFullTransactionsByAddressParams
+export type GetFullTransactionsByAddressParams = ActivityHistoryParams
 
-export type ExportFullTransactionsByAddressParams = {
+export type AxiosActivityHistoryParams = {
+  protocol: 'ethereum'
+} & ActivityHistoryParams
+
+export type AxiosGetFullTransactionsByAddressParams = AxiosActivityHistoryParams
+
+export type ExportActivityHistoryParams = {
   network: NetworkType
 } & CommonExportFullTransactionsByAddressParams
+
+export type ExportFullTransactionsByAddressParams = ExportActivityHistoryParams

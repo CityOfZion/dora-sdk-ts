@@ -17,14 +17,14 @@ import type {
   TransactionsResponse,
   TransferHistoryResponse,
   VoterResponse,
-  AxiosGetFullTransactionsByAddressParams,
-  GetFullTransactionsByAddressParams,
-  ExportFullTransactionsByAddressParams
+  AxiosActivityHistoryParams,
+  ActivityHistoryParams,
+  ExportActivityHistoryParams
 } from '../../interfaces/api/neo'
 import { COZ_API_URL } from '../../constants'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
-import { GetFullTransactionsByAddressResponse } from '../../interfaces/api/common'
+import { ActivityHistoryResponse } from '../../interfaces/api/common'
 import { RestConfig } from '../../interfaces'
 
 const defaultRestConfig: RestConfig = {
@@ -218,12 +218,12 @@ export class NeoRESTApi {
   }
 
   async getFullTransactionsByAddress(
-    params: GetFullTransactionsByAddressParams
-  ): Promise<GetFullTransactionsByAddressResponse> {
+    params: ActivityHistoryParams
+  ): Promise<ActivityHistoryResponse> {
     const { data } = await this.axiosApiV2.post<
-      GetFullTransactionsByAddressResponse,
-      AxiosResponse<GetFullTransactionsByAddressResponse>,
-      AxiosGetFullTransactionsByAddressParams
+      ActivityHistoryResponse,
+      AxiosResponse<ActivityHistoryResponse>,
+      AxiosActivityHistoryParams
     >('/unified/activity-history', {
       pageLimit: 50,
       ...params,
@@ -234,7 +234,7 @@ export class NeoRESTApi {
   }
 
   async exportFullTransactionsByAddress(
-    params: ExportFullTransactionsByAddressParams
+    params: ExportActivityHistoryParams
   ): Promise<string> {
     const { data } = await this.axiosApiV2.post<string>(
       '/unified/activity-history-csv',
