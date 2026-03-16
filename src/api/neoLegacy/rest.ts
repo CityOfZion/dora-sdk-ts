@@ -113,7 +113,7 @@ export class NeoLegacyRESTApi {
     network = 'mainnet'
   ): Promise<object> {
     const method = 'contract_stats'
-    return await this.get(network, method)
+    return await this.get(network, method, contractHash)
   }
 
   async contractTransfers(
