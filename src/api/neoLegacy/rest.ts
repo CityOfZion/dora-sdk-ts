@@ -229,7 +229,7 @@ export class NeoLegacyRESTApi {
     return data
   }
 
-  private async get(...args: any[]) {
+  private async get(...args: unknown[]) {
     const endpoint = args.join('/')
     const { data } = await this.axios.get(`/${endpoint}`)
     return data
