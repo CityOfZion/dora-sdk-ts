@@ -1,6 +1,6 @@
 import { assert } from 'chai'
 
-import { NeoLegacyREST } from '../../../api'
+import { NeoLegacyRESTApi, NeoLegacyREST } from '../../../api'
 
 describe('neo legacy', () => {
   it('should get an asset', async () => {})
@@ -18,6 +18,23 @@ describe('neo legacy', () => {
   it('should get contracts', async () => {})
 
   it('should get contract transfers', async () => {})
+
+  it('should include the contract hash in contract stats requests', async () => {
+    const api = new NeoLegacyRESTApi()
+    const contractHash = '0x0123456789abcdef'
+    let requestedUrl = ''
+
+    ;(api['axios'].get as unknown as (
+      url: string
+    ) => Promise<{ data: object }>) = async (url: string) => {
+      requestedUrl = url
+      return { data: {} }
+    }
+
+    await api.contractStats(contractHash)
+
+    assert.strictEqual(requestedUrl, `/mainnet/contract_stats/${contractHash}`)
+  })
 
   it('should get the node registry', async () => {})
 

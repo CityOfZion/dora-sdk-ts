@@ -192,7 +192,7 @@ var NeoLegacyRESTApi = (function () {
                 switch (_a.label) {
                     case 0:
                         method = 'contract_stats';
-                        return [4, this.get(network, method)];
+                        return [4, this.get(network, method, contractHash)];
                     case 1: return [2, _a.sent()];
                 }
             });

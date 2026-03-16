@@ -63,6 +63,28 @@ describe('neo legacy', function () {
     it('should get contract transfers', function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2];
     }); }); });
+    it('should include the contract hash in contract stats requests', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var api, contractHash, requestedUrl;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    api = new api_1.NeoLegacyRESTApi();
+                    contractHash = '0x0123456789abcdef';
+                    requestedUrl = '';
+                    api['axios'].get = function (url) { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            requestedUrl = url;
+                            return [2, { data: {} }];
+                        });
+                    }); };
+                    return [4, api.contractStats(contractHash)];
+                case 1:
+                    _a.sent();
+                    chai_1.assert.strictEqual(requestedUrl, "/mainnet/contract_stats/".concat(contractHash));
+                    return [2];
+            }
+        });
+    }); });
     it('should get the node registry', function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2];
     }); }); });
